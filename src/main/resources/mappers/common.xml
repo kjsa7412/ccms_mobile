@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common">
+    <select id="selectYYYYForSearch" resultType="hashmap">
+        /* common.selectYYYYForSearch */
+        SELECT a.cd    "value",
+               a.cd_nm "label"
+        FROM sy_cmm_cd a
+        WHERE a.comp_cd = #{compCd}
+          AND a.cd_gb = 'SY091'
+          AND a.use_yn = 'Y'
+        ORDER BY a.cd
+    </select>
+
+    <select id="selectMMForSearch" resultType="hashmap">
+        /* common.selectMMForSearch */
+        SELECT a.cd    "value",
+               a.cd_nm "label"
+        FROM sy_cmm_cd a
+        WHERE a.comp_cd = #{compCd}
+          AND a.cd_gb = 'SY092'
+          AND a.use_yn = 'Y'
+        ORDER BY a.cd
+    </select>
+
+    <select id="selectTSGBForSearch" resultType="hashmap">
+        /* common.selectTSGBForSearch */
+        SELECT a.cd    "value",
+               a.cd_nm "label"
+        FROM sy_cmm_cd a
+        WHERE a.comp_cd = #{compCd}
+          AND a.cd_gb = 'ER010'
+          AND a.use_yn = 'Y'
+        ORDER BY a.cd
+    </select>
+
+    <select id="selectTSMETHForSearch" resultType="hashmap">
+        /* common.selectTSMETHForSearch */
+        SELECT a.cd    "value",
+               a.cd_nm "label"
+        FROM sy_cmm_cd a
+        WHERE a.comp_cd = #{compCd}
+          AND a.cd_gb = 'ER030'
+          AND a.use_yn = 'Y'
+        ORDER BY a.cd
+    </select>
+</mapper>

@@ -1,0 +1,33 @@
+/* Reset styles */
+textarea,
+body,
+div,
+input,
+form,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global styles */
+* {
+    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+    font-weight: normal;
+    overscroll-behavior-y: contain;
+}
+
+body {
+    background-color: #ffffff; /* Set your desired background color */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

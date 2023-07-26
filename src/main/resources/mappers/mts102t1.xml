@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mts102t1">
+    <select id="selectMTS102t1" resultType="hashmap">
+        /* mts102t1.selectMTS102t1 */
+        select a.comp_cd,
+               a.trou_mngr_dd || '-' || a.trou_mngr_no           as trou_mngr_dd_no,
+               a.trou_gb_cotr_cd,
+               getcmmnm(a.comp_cd, 'ER010', a.trou_gb_cotr_cd)   as trou_gb_cotr_nm,
+               a.equi_cd,
+               b.equi_nm,
+               a.trou_dd || a.trou_hrti                          as trou_dd_hrti,
+               a.weth_cd,
+               getcmmnm(a.comp_cd, 'TS060', a.weth_cd)           as weth_nm,
+               a.coer_id,
+               getusernm(a.comp_cd, a.coer_id)                   as coer_nm,
+               a.coer_dept_cd,
+               getdeptnm(a.comp_cd, a.coer_dept_cd)              as coer_dept_nm,
+               a.trou_cont,
+               a.atfi_id,
+               a.trou_acto_stts_cd,
+               getcmmnm(a.comp_cd, 'ER020', a.trou_acto_stts_cd) as trou_acto_stts_nm,
+               a.trou_gb_acto_cd,
+               getcmmnm(a.comp_cd, 'ER010', a.trou_gb_acto_cd)   as trou_gb_acto_nm,
+               a.trou_acto_meth_cd,
+               getcmmnm(a.comp_cd, 'ER030', a.trou_acto_meth_cd) as trou_acto_meth_nm,
+               a.trou_acto_dd,
+               a.trou_acto_hrti,
+               a.trou_actr_nm,
+               a.trou_actr_dept_cd,
+               a.trou_acto_cont,
+               a.maint_id,
+               a.maint_nm,
+               a.remark
+        from er_trou_mngr a
+                 left join ts_equi_mast b on a.equi_cd = b.equi_cd
+        where a.comp_cd = #{compCd}
+          and a.trou_mngr_dd || '-' || a.trou_mngr_no = #{id}
+    </select>
+
+    <update id="updateTROU">
+        /* mts102t1.updateTROU */
+        update er_trou_mngr
+        set trou_acto_stts_cd = #{trou_acto_stts_cd}, -- 장애조치상태 (ER020)
+            trou_gb_acto_cd   = #{trou_gb_acto_cd},   -- 장애구분(ER010)
+            trou_acto_meth_cd = #{trou_acto_meth_cd}, -- 처리방법(ER030)
+            trou_acto_dd      = #{trou_acto_dd},      -- 조치일자
+            trou_acto_hrti    = #{trou_acto_hrti},    -- 조치시각
+            trou_actr_nm      = #{trou_actr_nm},      -- 처리자
+            trou_acto_cont    = #{trou_acto_cont}     -- 처리내용
+        where comp_cd = #{compCd}
+          and trou_mngr_dd || '-' || trou_mngr_no = #{id}
+    </update>
+
+    <update id="deleteTROU">
+        /* mts102t1.deleteTROU */
+        update er_trou_mngr
+        set trou_acto_stts_cd = 'ESONA', -- 장애조치상태 (ER020)
+            trou_gb_acto_cd   = '',      -- 장애구분(ER010)
+            trou_acto_meth_cd = '',      -- 처리방법(ER030)
+            trou_acto_dd      = '',      -- 조치일자
+            trou_acto_hrti    = '',      -- 조치시각
+            trou_actr_nm      = '',      -- 처리자
+            trou_acto_cont    = ''       -- 처리내용
+        where comp_cd = #{compCd}
+          and trou_mngr_dd || '-' || trou_mngr_no = #{id}
+    </update>
+</mapper>

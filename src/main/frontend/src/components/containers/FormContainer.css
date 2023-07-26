@@ -1,0 +1,10 @@
+.form-container-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: center;
+    width: 100%;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-top: 70px;
+}

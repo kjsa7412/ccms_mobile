@@ -1,0 +1,228 @@
+.mcm101-baseContainer {
+    position: fixed;
+    background: linear-gradient(#E9559C, #E9559C 33.33%, #601885);
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.mcm101-baseContainer.immediately {
+    transition: 0s ease;
+}
+
+.mcm101-baseContainer.lazy {
+    transition: 0.4s ease;
+}
+
+
+.mcm101-lineContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding-right: 16px;
+    padding-left: 16px;
+    width: 100%;
+    height: 2px;
+}
+
+.mcm101-line {
+    width: 100%;
+    height: 1px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: ghostwhite;
+    border-radius: 10px;
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+}
+
+.mcm101-headerContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: var(--cm-header);
+}
+
+.mcm101-close {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: var(--cm-header);
+    height: var(--cm-header);
+}
+
+.mcm101-menuContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.mcm101-menuContainer-top {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.mcm101-menuContainer-top span {
+    color: white;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.mcm101-menuContainer-body {
+    width: 100%;
+    flex: 1;
+    overflow: auto;
+}
+
+.mcm101-menuContainer-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.mcm101-itemContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.mcm101-itemContainer-p {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    z-index: 1;
+    color: black;
+}
+
+.mcm101-itemContainer-c {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+}
+
+.mcm101-itemContainer-c.selected {
+    position: relative;
+    visibility: visible;
+}
+
+.mcm101-itemContainer-c.unSelected {
+    position: absolute;
+    visibility: hidden;
+}
+
+.mcm101-subMunuLine {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 50px;
+    border-style: none;
+    border-color: #ebf5ff;
+    border-width: 3px;
+    border-bottom: none;
+    border-top: none;
+    border-left: none;
+}
+
+.mcm101-iconContainer {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 50px;
+}
+
+.mcm101-menuNameContainer-p {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    font-size: 20px;
+}
+
+.mcm101-menuNameContainer-p.selected {
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.mcm101-menuNameContainer-p.unSelected {
+    font-weight: normal;
+    color: white;
+}
+
+.mcm101-menuNameContainer-c {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    font-size: 18px;
+    color: white;
+}
+
+.mcm101-menuNameContainer-c.selected {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.mcm101-menuNameContainer-c.unSelected {
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.mcm101-selectedMenu {
+    position: absolute;
+    display: flex;
+    width: 250px;
+    height: 100%;
+    border-radius: 0px 50px 50px 0px;
+    background-color: white;
+    z-index: 0;
+}
+
+.mcm101-signOutContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+.mcm101-signOutContents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    font-size: 18px;
+    font-weight: normal;
+    color: white;
+}
+
+.mcm101-icon {
+    width: 16px;
+    height: 16px;
+}

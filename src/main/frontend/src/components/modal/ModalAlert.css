@@ -1,0 +1,32 @@
+.modalAlert-textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    width: 100%;
+}
+
+.modalAlert-textContainer > p {
+    font-weight: bold;
+    font-size: 13px;
+    padding: 10px;
+}
+
+.modalAlert-ok {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 25%;
+    width: 100%;
+    background: white;
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    font-size: 13px;
+    color: red;
+}

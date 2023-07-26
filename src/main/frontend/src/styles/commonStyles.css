@@ -1,0 +1,11 @@
+/* commonStyles.css */
+:root {
+    --main-color: #E4007E;
+    --cm-header: 60px;
+    --cm-screenLabel: 35px;
+    --cm-screenSearchItem: 38px;
+    --cm-columnBlank: 10px;
+    --cm-rowBlank: 10px;
+    --cm-tabBlank: 40px;
+    --cm-bottomBlank: 50px;
+}

@@ -1,0 +1,59 @@
+.post-baseContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+}
+
+.post-bodyContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.post-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 25%;
+    min-height: 40px;
+    border: none;
+    background: var(--main-color);
+    font-size: 13px;
+    color: white;
+    padding: 7px;
+}
+
+.post-title.first {
+    border-radius: 5px 0px 0px 0px;
+}
+
+.post-title.last {
+    border-radius: 0px 0px 0px 5px;
+}
+
+.post-contents {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 75%;
+    min-height: 40px;
+    border: none;
+    background: white;
+    font-size: 13px;
+    color: black;
+    padding: 7px;
+    word-break: break-word; /* 줄 바꿈을 위한 속성 추가 */
+}
+
+.post-contents.first {
+    border-radius: 0px 5px 0px 0px;
+}
+
+.post-contents.last {
+    border-radius: 0px 0px 5px 0px;
+}

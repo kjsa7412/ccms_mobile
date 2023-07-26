@@ -1,0 +1,29 @@
+.rowContents-baseContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    min-height: 25px;
+}
+
+.rowContents-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80px;
+    height: 100%;
+    margin: 0px 0px;
+    font-size: 13px;
+    color: #929292;
+}
+
+.rowContents-contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    flex: 1;
+    margin: 0px 0px;
+    font-size: 13px;
+    color: black;
+}

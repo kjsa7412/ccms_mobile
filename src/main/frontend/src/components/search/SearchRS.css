@@ -1,0 +1,15 @@
+.searchRS-baseContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchRS-required {
+    position: absolute;
+    background-color: red;
+    border-radius: 2px 0px 0px 0px;
+    border-bottom: 4px solid white;
+    border-top: 4px solid red;
+    border-left: 4px solid red;
+    border-right: 4px solid white;
+}

@@ -1,0 +1,43 @@
+.headerBase-baseContainer {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: var(--cm-header);
+    background-color: white;
+    z-index: 2;
+    top: 0px;
+}
+
+.headerBase-leftContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: var(--cm-header);
+}
+
+.headerBase-centerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: var(--cm-header);
+}
+
+.headerBase-rightContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: var(--cm-header);
+}
+
+.headerBase-itemContainer {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: none;
+}

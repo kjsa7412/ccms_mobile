@@ -1,0 +1,77 @@
+.msy101-signContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    width: 250px;
+    flex-basis: 250px;
+    padding: 20px;
+}
+
+.msy101-customImg {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.msy101-customInput {
+    width: 80%;
+    padding: 7px;
+    border: 0.5px solid #dcdcdc;
+    border-radius: 3px;
+    background-color: #f8f8f8;
+    font-size: 0.75em;
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+}
+
+.msy101-customInput::placeholder {
+    font-size: 0.75em;
+    color: darkgray;
+}
+
+.msy101-customInput:focus {
+    outline: none;
+    border-color: darkgray;
+}
+
+.msy101-customButton {
+    width: 80%;
+    padding: 7px;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--main-color);
+    font-size: 0.75em;
+    font-weight: bold;
+    color: white;
+    -webkit-appearance: none;
+}
+
+.msy101-customButton.canLogin {
+    opacity: 1;
+}
+
+.msy101-customButton.canNotLogin {
+    opacity: 0.5;
+}
+
+.msy101-line {
+    width: 80%;
+    height: 2px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: darkgray;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.msy101-notification {
+    font-size: 0.75em;
+    color: red;
+    margin-bottom: 10px;
+}

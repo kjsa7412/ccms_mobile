@@ -1,0 +1,31 @@
+.upsertSubmitButton-baseContainer {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.upsertSubmitButton-button {
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--main-color);
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    -webkit-appearance: none;
+}
+
+.upsertSubmitButton-Loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--main-color);
+    font-size: 12px;
+    color: white;
+}

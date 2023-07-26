@@ -1,0 +1,10 @@
+.searchContainer-search {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.searchContainer-search > div:nth-last-child(2) {
+    margin-right: 10px;
+}

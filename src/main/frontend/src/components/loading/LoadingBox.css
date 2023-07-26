@@ -1,0 +1,40 @@
+@keyframes ani {
+    from {
+        transform: translate(-100%, 0);
+    }
+    to {
+        transform: translate(200%, 0px);
+    }
+}
+
+.loadingBox-baseContainer {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    border-radius: 5px;
+    background-color: #cccccc;
+}
+
+.loadingBox-baseContainer.isLong {
+    width: 100%;
+}
+
+.loadingBox-baseContainer2 {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, #cccccc, #e7e7e7, #e7e7e7, #cccccc);
+    background-size: 100%;
+    animation: ani 2s ease infinite;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    opacity: 0.5;
+}

@@ -1,0 +1,26 @@
+@keyframes ani {
+    0% {
+        background-position: 50% 100%;
+    }
+    50% {
+        background-position: 0% 50%;
+        /* 중간 상태에는 여기에 추가적인 스타일을 적용할 수 있습니다 */
+    }
+    100% {
+        background-position: 50% 100%;
+    }
+}
+
+.loadingPost-baseContainer {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-radius: 5px;
+    background: linear-gradient(-30deg, #b9b9b9, #ececec, #b9b9b9);
+    background-size: 300% 300%;
+    animation: ani 4s ease infinite;
+}

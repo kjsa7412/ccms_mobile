@@ -1,0 +1,9 @@
+.inputContainer-input {
+    display: flex;
+    width: 100%;
+    flex: 1;
+}
+
+.inputContainer-input > div:nth-last-child(2) {
+    margin-right: 10px;
+}

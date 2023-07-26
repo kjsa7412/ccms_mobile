@@ -1,0 +1,14 @@
+.screen-container-parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.screen-container-parent.color {
+    background: linear-gradient(#E9559C, #e12881, #E9559C);
+    justify-content: center;
+}
+
