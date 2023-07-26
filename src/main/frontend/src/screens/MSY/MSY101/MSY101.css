@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 250px;
     flex-basis: 250px;
     padding: 20px;
@@ -49,6 +49,20 @@
     -webkit-appearance: none;
 }
 
+.msy101-customButton2 {
+    width: 65%;
+    height: 35px;
+    padding: 7px;
+    border: none;
+    border-radius: 100px;
+    background-color: var(--main-color);
+    font-size: 0.75em;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+    -webkit-appearance: none;
+}
+
 .msy101-customButton.canLogin {
     opacity: 1;
 }
@@ -74,4 +88,16 @@
     font-size: 0.75em;
     color: red;
     margin-bottom: 10px;
+}
+
+.msy101-copyRight {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    bottom: 20px;
+    font-size: 10px;
+    color: white;
 }

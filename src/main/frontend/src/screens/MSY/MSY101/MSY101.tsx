@@ -12,8 +12,12 @@ import {signIn} from "./MSY101_API";
 import {registerAccessTokenOfHeader} from "../../../utils/HandleSign";
 import PageTitle from "components/PageTitle";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
+import SignInput from "../../../components/input/SignInput";
+import Blank from "../../../components/Blank";
+import {EBlank} from "@custom-enums/common-enum";
 
 const MSY101 = () => {
+    // data
     const [canLogin, setCanLogin] = useState<boolean>(false);
     const [isLoginFail, setIsLoginFail] = useState<boolean>(false);
     const [, setRcUser] = useRecoilState<IUser>(userAtom);
@@ -22,7 +26,11 @@ const MSY101 = () => {
     const resetUser = useResetRecoilState(userAtom);
     const resetSignInfo = useResetRecoilState(signInfoAtom);
     const [inputData, setInputData] = useState<{ id: string; pw: string }>({id: '', pw: ''});
-    const {register, handleSubmit, getValues} = useForm();
+
+    const methods = useForm({
+        mode: 'onSubmit',
+        defaultValues: inputData,
+    });
 
     const resultQuery_signIn = useQuery(
         [EQueryKey.MSY101_signIn],
@@ -63,18 +71,18 @@ const MSY101 = () => {
         })
 
     const onSignIn = async () => {
-        const {inputID, inputPW} = getValues();
-        setInputData({id: inputID, pw: inputPW});
+        const {id, pw} = methods.getValues();
+        setInputData({id: id, pw: pw});
     };
 
     const validateInputData = () => {
-        const {inputID, inputPW} = getValues();
+        const {id, pw} = methods.getValues();
 
-        if (!!inputID && !!inputPW && !canLogin) {
+        if (!!id && !!pw && !canLogin) {
             setCanLogin(true);
         }
 
-        if ((!inputID || !inputPW) && canLogin) {
+        if ((!id || !pw) && canLogin) {
             setCanLogin(false);
         }
     };
@@ -91,25 +99,27 @@ const MSY101 = () => {
     return (
         <ScreenContainer isColor={true}>
             <PageTitle title="Login" themeColor={"#E9559C"}/>
-            <form className={"msy101-signContainer"} onSubmit={handleSubmit(onSignIn)}>
+            <form className={"msy101-signContainer"} onSubmit={methods.handleSubmit(onSignIn)}>
                 <img alt={'logo'} className={"msy101-customImg"} src="img/ccmsLogo.png"/>
-                <input className={"msy101-customInput"}
-                       type="text"
-                       placeholder="Username"
-                       {...register('inputID', {
-                           onChange: validateInputData,
-                       })}
+                <SignInput
+                    name={'id'}
+                    methods={methods}
+                    label={'USERNAME'}
+                    placeholder={'아이디'}
+                    onChange={validateInputData}
                 />
-                <input className={"msy101-customInput"}
-                       type="password"
-                       placeholder="Password"
-                       {...register('inputPW', {
-                           onChange: validateInputData,
-                       })}
+                <SignInput
+                    name={'pw'}
+                    methods={methods}
+                    label={'PASSWORD'}
+                    placeholder={'비밀번호'}
+                    onChange={validateInputData}
+                    type={'password'}
                 />
-                <input className={`msy101-customButton ${canLogin ? "canLogin" : "canNotLogin"}`}
+                <Blank type={EBlank.Row}/>
+                <input className={`msy101-customButton2 ${canLogin ? "canLogin" : "canNotLogin"}`}
                        type="Submit"
-                       value="Sign In"
+                       value="SIGN IN"
                        readOnly={true}
                        disabled={!canLogin}
                 />
@@ -120,6 +130,7 @@ const MSY101 = () => {
                     </>
                 )}
             </form>
+            <div className={"msy101-copyRight"}>copyright(c) 동래 CCTV 통합관제센터. All rights reserved.</div>
         </ScreenContainer>
     )
 }

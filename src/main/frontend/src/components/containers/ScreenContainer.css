@@ -8,7 +8,7 @@
 }
 
 .screen-container-parent.color {
-    background: linear-gradient(#E9559C, #e12881, #E9559C);
+    background: linear-gradient(#E9559C, #E9559C, #E9559C);
     justify-content: center;
 }
 
