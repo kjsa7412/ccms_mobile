@@ -14,7 +14,7 @@ const UpsertSubmitButton = ({value, isLoading, disabled = false}: Props) => {
                 <LoadingBox pHeight={45}/>
             ) : isLoading ? (
                 <div className={"upsertSubmitButton-Loading"}>
-                    <img src={`${process.env.PUBLIC_URL}/img/Spinner-1s-38px.gif`}/>
+                    <img alt={"spinner"} src={`${process.env.PUBLIC_URL}/img/Spinner-1s-38px.gif`}/>
                 </div>
             ) : (
                 <input className={"upsertSubmitButton-button"} type="Submit" value={value} readOnly={true}/>

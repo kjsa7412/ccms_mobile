@@ -18,7 +18,7 @@ h6 {
 
 /* Global styles */
 * {
-    font-family: 'Roboto', 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans', 'Noto Sans KR', sans-serif;
     font-weight: normal;
     overscroll-behavior-y: contain;
 }

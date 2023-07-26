@@ -72,7 +72,7 @@ const modalMutation = ({
                         <p>처리중입니다.</p>
                     </div>
                     <div className={"modalMutation-button"}>
-                        <img src={`${process.env.PUBLIC_URL}/img/Spinner-1s-38px.gif`}/>
+                        <img alt={'spinner'} src={`${process.env.PUBLIC_URL}/img/Spinner-1s-38px.gif`}/>
                     </div>
                 </>
             )}

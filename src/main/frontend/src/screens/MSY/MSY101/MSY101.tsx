@@ -92,7 +92,7 @@ const MSY101 = () => {
         <ScreenContainer isColor={true}>
             <PageTitle title="Login" themeColor={"#E9559C"}/>
             <form className={"msy101-signContainer"} onSubmit={handleSubmit(onSignIn)}>
-                <img className={"msy101-customImg"} src="img/ccmsLogo.png"/>
+                <img alt={'logo'} className={"msy101-customImg"} src="img/ccmsLogo.png"/>
                 <input className={"msy101-customInput"}
                        type="text"
                        placeholder="Username"

@@ -1,4 +1,4 @@
-import React, {ReactNode} from "react";
+import React from "react";
 import {EIcon} from "@custom-enums/common-enum";
 
 interface Props {

@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {ISearch} from "@custom-interfaces/search-interface";
 
 const useInitPostMax = (setPostMax: Function, rcSearch: ISearch) => {
