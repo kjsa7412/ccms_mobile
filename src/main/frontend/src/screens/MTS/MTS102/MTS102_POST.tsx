@@ -55,7 +55,7 @@ const MTS102_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
                     (<>
                         <ScreenLabel title={'장애내역'} count={0}/>
                         <Blank type={EBlank.Row}/>
-                        <LoadingPost pHeight={190}/>
+                        <LoadingPost pHeight={130}/>
                     </>) :
                     (<>
                         <ScreenLabel key="mts101-post-label" title={'장애내역'} count={getTotalCount()}/>
