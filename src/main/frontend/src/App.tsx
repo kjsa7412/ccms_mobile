@@ -15,6 +15,7 @@ import {IMenu} from "@custom-interfaces/menu-interface";
 import {menuAtom} from "./atoms/menuAtom";
 import {registerAccessTokenOfHeader} from "./utils/HandleSign";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
+import Authentication from "./components/authentication/Authentication";
 
 function App() {
     setAxios();
@@ -38,8 +39,10 @@ function App() {
                 setRcFirst({isFirst: false});
             },
             onError: () => {
+                console.log("resultQuery_silentSignIn onError");
                 resetUser();
                 resetSignInfo();
+                setRcFirst({isFirst: false});
                 navigate('/');
             }
         }
@@ -75,7 +78,9 @@ function App() {
             ((resultQuery_silentSignIn.status !== 'success' &&
                     resultQuery_silentSignIn.status !== 'idle') ||
                 resultQuery_silentSignIn.isFetching) ? (
-                <div style={{width: "100px", height: "100px", backgroundColor: "red"}}/>
+                <AppContainer>
+                    <Authentication/>
+                </AppContainer>
             ) : (
                 <AppContainer>
                     <MCM101/>

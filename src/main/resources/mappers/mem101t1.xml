@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mem101t1">
-
+    <select id="selectMEM101T1" resultType="hashmap">
+        /* mem101t1.selectMEM101T1 */
+        select equi_cd,
+               equi_nm,
+               manu_comp,
+               inst_addr
+        from ts_equi_mast
+        where use_yn = 'Y'
+          and equi_cd = #{id}
+        order by equi_nm
+    </select>
 </mapper>

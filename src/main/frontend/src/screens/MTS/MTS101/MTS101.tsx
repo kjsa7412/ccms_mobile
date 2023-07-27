@@ -8,7 +8,7 @@ import ScreenLabel from "../../../components/label/ScreenLabel";
 import SearchContainer from "../../../components/containers/SearchContainer";
 import YYYYList from "../../../components/search/YYYYList";
 import MMList from "../../../components/search/MMList";
-import {useRecoilState} from "recoil";
+import {useRecoilState, useResetRecoilState} from "recoil";
 import {ISearch} from "@custom-interfaces/search-interface";
 import {searchAtom} from "../../../atoms/searchAtom";
 import {useQuery, useQueryClient} from 'react-query';
@@ -31,6 +31,7 @@ const MTS101 = () => {
     const [postMax, setPostMax] = useState(20);
     const [rcSearch, setRcSearch] = useRecoilState<ISearch>(searchAtom);
     const [, setRcMTS101] = useRecoilState<IMTS101>(mts101Atom);
+    const resetRcSearch = useResetRecoilState(searchAtom);
 
     // query
     const resultQuery_selectMTS101 = useQuery(
@@ -50,6 +51,12 @@ const MTS101 = () => {
             queryClient.cancelQueries(EQueryKey.MTS101_selectMTS101);
         };
     }, [rcSearch.yyyy, rcSearch.mm]);
+
+    useEffect(() => {
+        resetRcSearch();
+        return () => {
+        };
+    }, []);
 
     // custom hook
     useInfiniteScroll(setPostMax);

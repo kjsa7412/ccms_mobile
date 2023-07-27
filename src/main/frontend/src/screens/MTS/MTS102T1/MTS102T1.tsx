@@ -8,7 +8,7 @@ import {IMenu} from "@custom-interfaces/menu-interface";
 import {menuAtom} from "../../../atoms/menuAtom";
 import {useNavigate} from "react-router-dom";
 import {IModalAlert} from "@custom-interfaces/common-interface";
-import {EInput, EModalMutationStatus} from "@custom-enums/common-enum";
+import {EBlank, EInput, EModalMutationStatus} from "@custom-enums/common-enum";
 import {mts102Atom} from "../../../atoms/MTS102/mts102Atom";
 import {IMTS102} from "@custom-interfaces/MTS102/mts102-interface";
 import {FormProvider, useForm} from "react-hook-form";
@@ -25,6 +25,7 @@ import {formattedDate, parseDateStringToDate} from "../../../utils/HandleDateFor
 import InputContainer from "../../../components/containers/InputContainer";
 import Input from "../../../components/input/Input";
 import UpsertSubmitButton from "../../../components/button/UpsertSubmitButton";
+import Blank from "../../../components/Blank";
 
 const MTS102T1 = () => {
     // data
@@ -221,6 +222,7 @@ const MTS102T1 = () => {
                                              contents={resultQuery_selectMTS102T1.data?.data?.Content?.[0]?.trou_cont}/>
                             </>
                     }
+                    <Blank type={EBlank.Row}/>
                     <ScreenLabel title={'장애처리'}/>
                     <InputContainer>
                         <Input

@@ -1,7 +1,7 @@
 import './SignInput.css'
-import {Icons} from "../icons";
 import {EIcon} from "@custom-enums/common-enum";
 import {useState} from "react";
+import Icons from "../Icons";
 
 type Props = {
     name: string,

@@ -4,7 +4,7 @@ import PageTitle from "../../../components/PageTitle";
 import HeaderBase from "../../../components/header/HeaderBase";
 import {HeaderMenu, HeaderTitle} from "../../../components/header/HeaderItems";
 import {useQuery, useQueryClient} from "react-query";
-import {useRecoilState} from "recoil";
+import {useRecoilState, useResetRecoilState} from "recoil";
 import {ISearch} from "@custom-interfaces/search-interface";
 import {searchAtom} from "../../../atoms/searchAtom";
 import {IMEM101} from "@custom-interfaces/MEM101/mem101-interface";
@@ -29,12 +29,20 @@ const MEM101 = () => {
     // data
     const [postMax, setPostMax] = useState(20);
     const [rcSearch,] = useRecoilState<ISearch>(searchAtom);
+    const resetRcSearch = useResetRecoilState(searchAtom);
 
     // query
     const resultQuery_selectMEM101 = useQuery(
         [EQueryKey.MEM101_selectMEM101],
         () => selectMEM101()
     )
+
+    // effect
+    useEffect(() => {
+        resetRcSearch();
+        return () => {
+        };
+    }, []);
 
     // custom hook
     useInfiniteScroll(setPostMax);

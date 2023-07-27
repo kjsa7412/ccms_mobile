@@ -15,6 +15,7 @@ import {EQueryKey} from "@custom-enums/queryKey_enum";
 import SignInput from "../../../components/input/SignInput";
 import Blank from "../../../components/Blank";
 import {EBlank} from "@custom-enums/common-enum";
+import {theme1} from "../../../styles/theme";
 
 const MSY101 = () => {
     // data
@@ -98,7 +99,7 @@ const MSY101 = () => {
 
     return (
         <ScreenContainer isColor={true}>
-            <PageTitle title="Login" themeColor={"#E9559C"}/>
+            <PageTitle title="Login" themeColor={theme1.color.mainColor_m1}/>
             <form className={"msy101-signContainer"} onSubmit={methods.handleSubmit(onSignIn)}>
                 <img alt={'logo'} className={"msy101-customImg"} src="img/ccmsLogo.png"/>
                 <SignInput
@@ -126,7 +127,7 @@ const MSY101 = () => {
                 {isLoginFail && (
                     <>
                         <div className={"msy101-line"}/>
-                        <span className={"msy101-notification"}>로그인에 실패했습니다.</span>
+                        <span className={"msy101-notification"}>로그인을 실패했습니다.</span>
                     </>
                 )}
             </form>

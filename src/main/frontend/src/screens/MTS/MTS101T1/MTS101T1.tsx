@@ -10,14 +10,14 @@ import {IMTS101} from "@custom-interfaces/MTS101/mts101-interface";
 import {mts101Atom} from "../../../atoms/MTS101/mts101Atom";
 import {FormProvider, useForm} from 'react-hook-form';
 import {initData} from "./MTS101T1_FORM";
-import {selectMTS101T1, selectTSGBForSearch, selectTSMETHForSearch, insertTROU} from "./MTS101T1_API";
+import {insertTROU, selectMTS101T1, selectTSGBForSearch, selectTSMETHForSearch} from "./MTS101T1_API";
 import {useMutation, useQuery} from 'react-query';
 import ScreenLabel from "../../../components/label/ScreenLabel";
 import LoadingPost from "../../../components/loading/LoadingPost";
 import RowContents from "../../../components/contents/RowContents";
 import {formattedDate} from "../../../utils/HandleDateFormat";
 import Input from "../../../components/input/Input";
-import {EInput, EModalMutationStatus} from "@custom-enums/common-enum";
+import {EBlank, EInput, EModalMutationStatus} from "@custom-enums/common-enum";
 import InputContainer from "../../../components/containers/InputContainer";
 import UpsertSubmitButton from "../../../components/button/UpsertSubmitButton";
 import {IModalAlert} from "@custom-interfaces/common-interface";
@@ -25,6 +25,7 @@ import ModalAlert from "../../../components/modal/ModalAlert";
 import ModalMutation from "../../../components/modal/ModalMutation";
 import {useNavigate} from "react-router-dom";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
+import Blank from "../../../components/Blank";
 
 const MTS101T1 = () => {
     // data
@@ -174,6 +175,7 @@ const MTS101T1 = () => {
                                              contents={resultQuery_selectMTS101T1.data?.data?.Content?.[0]?.trou_cont}/>
                             </>
                     }
+                    <Blank type={EBlank.Row}/>
                     <ScreenLabel title={'장애처리'}/>
                     <InputContainer>
                         <Input

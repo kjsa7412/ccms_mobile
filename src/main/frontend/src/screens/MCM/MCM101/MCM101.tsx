@@ -12,9 +12,9 @@ import {theme1} from "../../../styles/theme";
 import {useQuery} from "react-query";
 import {signOut} from "./MCM101_API";
 import axios from "axios";
-import {Icons} from "../../../components/icons";
 import {EIcon} from "@custom-enums/common-enum";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
+import Icons from "../../../components/Icons";
 
 const MCM101 = () => {
     const navigate = useNavigate();

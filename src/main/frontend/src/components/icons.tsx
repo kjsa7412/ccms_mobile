@@ -8,7 +8,7 @@ interface Props {
     height?: string;
 }
 
-export const Icons = ({iconType, fill = "black", width = "16", height = "16"}: Props): JSX.Element => {
+const Icons = ({iconType, fill = "black", width = "16", height = "16"}: Props): JSX.Element => {
     return (
         <svg clipRule="evenodd" viewBox="0 0 24 24"
              xmlns="http://www.w3.org/2000/svg" width={width} height={height}>
@@ -52,4 +52,4 @@ export const Icons = ({iconType, fill = "black", width = "16", height = "16"}: P
     )
 }
 
-
+export default Icons;
