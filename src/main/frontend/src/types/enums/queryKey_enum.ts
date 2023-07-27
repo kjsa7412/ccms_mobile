@@ -4,6 +4,9 @@ export const EQueryKey = {
     SEARCH_MM: 'SEARCH_MM',
     SEARCH_TSGB: 'SEARCH_TSGB',
     SEARCH_TSMETH: 'SEARCH_TSMETH',
+    SEARCH_EQUICD: 'SEARCH_EQUICD',
+    SEARCH_EQUINM: 'SEARCH_EQUINM',
+    SEARCH_EQUIADDR: 'SEARCH_EQUIADDR',
     // MSY101
     MSY101_signIn: 'MSY101_signIn',
     MSY101_silentSignIn: 'MSY101_silentSignIn',
@@ -15,4 +18,6 @@ export const EQueryKey = {
     // MTS102
     MTS102_selectMTS102: 'MTS102_selectMTS102',
     MTS102T1_selectMTS102T1: 'MTS102T1_selectMTS102T1',
+    // MEM101
+    MEM101_selectMEM101: 'MEM101_selectMEM101'
 }

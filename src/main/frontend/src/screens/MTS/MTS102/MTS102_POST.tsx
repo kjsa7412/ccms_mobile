@@ -25,23 +25,13 @@ const MTS102_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
 
         const inputData = selectQuery.data.data.Content;
 
-        if (!!cctvName?.value && !!cctvTSGB?.value) {
-            for (let data of inputData) {
-                if (cctvTSGB.value === data.trou_gb_cotr_cd && cctvName.value === data.equi_cd) {
-                    totalCount++;
-                }
+        for (let data of inputData) {
+            let isMatch1 = !!cctvName?.value ? cctvName.value === data.equi_cd : true;
+            let isMatch2 = !!cctvTSGB?.value ? cctvTSGB.value === data.trou_gb_cotr_cd : true;
+
+            if (isMatch1 && isMatch2) {
+                totalCount++;
             }
-        } else if (!!cctvName?.value || !!cctvTSGB?.value) {
-            for (let data of inputData) {
-                if (
-                    (!!cctvTSGB?.value && cctvTSGB.value === data.trou_gb_cotr_cd) ||
-                    (!!cctvName?.value && cctvName.value === data.equi_cd)
-                ) {
-                    totalCount++;
-                }
-            }
-        } else {
-            totalCount = inputData.length;
         }
 
         return totalCount;
@@ -62,10 +52,13 @@ const MTS102_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
                         {
                             selectQuery.data.data.Content
                                 .filter((value: any) => {
-                                    return !(
-                                        (!!rcSearch.cctvName?.value && rcSearch.cctvName?.value !== value.equi_cd) ||
-                                        (!!rcSearch.cctvTSGB?.value && rcSearch.cctvTSGB?.value !== value.trou_gb_cotr_cd)
-                                    );
+                                    let cctvName = rcSearch.cctvName;
+                                    let cctvTSGB = rcSearch.cctvTSGB;
+
+                                    let isMatch1 = !!cctvName?.value ? cctvName.value === value.equi_cd : true;
+                                    let isMatch2 = !!cctvTSGB?.value ? cctvTSGB.value === value.trou_gb_cotr_cd : true;
+
+                                    return isMatch1 && isMatch2;
                                 })
                                 .map((value: any, index: number) => {
                                     if (postMax < index) {

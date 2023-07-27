@@ -15,6 +15,9 @@ export const searchAtom = atom<ISearch>({
         cctvName: undefined,
         cctvCode: undefined,
         cctvAddr: undefined,
-        cctvTSGB: undefined
+        cctvTSGB: undefined,
+        equiCd: undefined,
+        equiNm: undefined,
+        equiAddr: undefined
     }
 });

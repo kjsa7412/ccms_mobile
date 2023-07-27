@@ -5,7 +5,7 @@ import {useQuery} from "react-query";
 import axios from "axios";
 import LoadingBox from "../loading/LoadingBox";
 import React from "react";
-import SearchRS from "./SearchRS";
+import SearchRS from "../searchRS/SearchRS";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
 
 const YYYYList = ({isLong = false}: { isLong?: boolean }) => {

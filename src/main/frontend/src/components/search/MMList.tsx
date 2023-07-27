@@ -4,7 +4,7 @@ import LoadingBox from '../loading/LoadingBox';
 import {searchAtom} from "../../atoms/searchAtom";
 import {useRecoilState} from "recoil";
 import {ISearch} from "@custom-interfaces/search-interface";
-import SearchRS from "./SearchRS";
+import SearchRS from "../searchRS/SearchRS";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
 
 const MMList = ({isLong = false}: { isLong?: boolean }) => {

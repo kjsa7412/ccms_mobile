@@ -7,7 +7,17 @@ const useInitPostMax = (setPostMax: Function, rcSearch: ISearch) => {
         return () => {
             // Cleanup 로직 (옵셔널)
         };
-    }, [rcSearch.yyyy, rcSearch.mm, rcSearch.cctvAddr, rcSearch.cctvTSGB, rcSearch.cctvName, rcSearch.cctvCode]);
+    }, [
+        rcSearch.yyyy,
+        rcSearch.mm,
+        rcSearch.cctvAddr,
+        rcSearch.cctvTSGB,
+        rcSearch.cctvName,
+        rcSearch.cctvCode,
+        rcSearch.equiAddr,
+        rcSearch.equiCd,
+        rcSearch.equiNm
+    ]);
 };
 
 export default useInitPostMax;

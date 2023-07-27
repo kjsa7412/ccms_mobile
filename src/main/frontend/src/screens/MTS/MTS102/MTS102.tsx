@@ -21,7 +21,7 @@ import SearchContainer from "../../../components/containers/SearchContainer";
 import YYYYList from "../../../components/search/YYYYList";
 import MMList from "../../../components/search/MMList";
 import LoadingBox from "../../../components/loading/LoadingBox";
-import SearchRS from "../../../components/search/SearchRS";
+import SearchRS from "../../../components/searchRS/SearchRS";
 import {IResult_SelectMTS101} from "@custom-interfaces/MTS101/mts101-interface";
 import TSGBList from "../../../components/search/TSGBList";
 import MTS102_POST from "../MTS102/MTS102_POST";
@@ -44,7 +44,7 @@ const MTS102 = () => {
     useEffect(() => {
         resultQuery_selectMTS102.refetch();
 
-        setRcSearch((prev) => ({...prev, branch: null}));
+        setRcSearch((prev) => ({...prev, cctvName: null, cctvTSGB: null}));
         setRcMTS102((prev) => ({...prev, id: ""}));
 
         return () => {

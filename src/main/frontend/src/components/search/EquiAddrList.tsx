@@ -2,20 +2,20 @@ import {useRecoilState} from "recoil";
 import {ISearch} from "@custom-interfaces/search-interface";
 import {searchAtom} from "../../atoms/searchAtom";
 import {useQuery} from "react-query";
+import {EQueryKey} from "@custom-enums/queryKey_enum";
 import axios from "axios";
 import LoadingBox from "../loading/LoadingBox";
-import React from "react";
 import SearchRS from "../searchRS/SearchRS";
-import {EQueryKey} from "@custom-enums/queryKey_enum";
+import React from "react";
 
-const TSGBList = ({isLong = false}: { isLong?: boolean }) => {
+const EquiAddrList = ({isLong = false}: { isLong?: boolean }) => {
     const [rcSearch, setRcSearch] = useRecoilState<ISearch>(searchAtom);
 
-    const resultQuery_selectTSGBForSearch = useQuery(
-        [EQueryKey.SEARCH_TSGB],
+    const resultQuery_selectEquiAddrForSearch = useQuery(
+        [EQueryKey.SEARCH_EQUIADDR],
         () =>
             axios.post('/api/common/selectList', {
-                queryId: 'common.selectTSGBForSearch'
+                queryId: 'common.selectEquiAddrForSearch'
             }),
         {
             onSuccess: (data) => {
@@ -25,15 +25,15 @@ const TSGBList = ({isLong = false}: { isLong?: boolean }) => {
 
     return (
         <>
-            {resultQuery_selectTSGBForSearch.status !== 'success' ? (
+            {resultQuery_selectEquiAddrForSearch.status !== 'success' ? (
                 <LoadingBox isLong={isLong}/>
             ) : (
                 <SearchRS
-                    placeholder={'장애구분'}
-                    option={resultQuery_selectTSGBForSearch.data?.data.Content}
-                    value={rcSearch.cctvTSGB}
-                    defaultValue={rcSearch.cctvTSGB}
-                    handleChange={(data: any) => setRcSearch((prev) => ({...prev, cctvTSGB: data}))}
+                    placeholder={'설치주소'}
+                    option={resultQuery_selectEquiAddrForSearch.data?.data.Content}
+                    value={rcSearch.equiAddr}
+                    defaultValue={rcSearch.equiAddr}
+                    handleChange={(data: any) => setRcSearch((prev) => ({...prev, equiAddr: data}))}
                     isClearable={true}
                     required={false}
                     isLong={isLong}
@@ -43,4 +43,4 @@ const TSGBList = ({isLong = false}: { isLong?: boolean }) => {
     )
 }
 
-export default TSGBList;
+export default EquiAddrList;

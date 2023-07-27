@@ -19,7 +19,7 @@ import {EMenuBar} from "@custom-enums/menu-enum";
 import useMenuStatus from "../../../hooks/useMenuStatus";
 import useInfiniteScroll from "../../../hooks/useInfiniteScroll";
 import LoadingBox from "../../../components/loading/LoadingBox";
-import SearchRS from "../../../components/search/SearchRS";
+import SearchRS from "../../../components/searchRS/SearchRS";
 import TSGBList from "../../../components/search/TSGBList";
 import MTS101_POST from "./MTS101_POST";
 import useInitPostMax from "../../../hooks/useInitPostMax";
@@ -43,7 +43,7 @@ const MTS101 = () => {
     useEffect(() => {
         resultQuery_selectMTS101.refetch();
 
-        setRcSearch((prev) => ({...prev, branch: null}));
+        setRcSearch((prev) => ({...prev, cctvName: null, cctvTSGB: null}));
         setRcMTS101((prev) => ({...prev, id: ""}));
 
         return () => {

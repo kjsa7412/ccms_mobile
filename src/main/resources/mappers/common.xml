@@ -44,4 +44,35 @@
           AND a.use_yn = 'Y'
         ORDER BY a.cd
     </select>
+
+    <select id="selectEquiCdForSearch" resultType="hashmap">
+        /* common.selectEquiCdForSearch */
+        select equi_cd "value",
+               equi_cd "label"
+        from ts_equi_mast
+        where use_yn = 'Y'
+        order by equi_nm
+    </select>
+
+    <select id="selectEquiNmForSearch" resultType="hashmap">
+        /* common.selectEquiNmForSearch */
+        select equi_nm "value",
+               equi_nm "label"
+        from ts_equi_mast
+        where use_yn = 'Y'
+        group by equi_nm
+        order by equi_nm
+    </select>
+
+    <select id="selectEquiAddrForSearch" resultType="hashmap">
+        /* common.selectEquiAddrForSearch */
+        select inst_addr "value",
+               inst_addr "label"
+        from ts_equi_mast
+        where use_yn = 'Y'
+          and inst_addr is not null
+          and inst_addr != ''
+        group by inst_addr
+        order by inst_addr
+    </select>
 </mapper>
