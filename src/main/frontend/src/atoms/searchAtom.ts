@@ -12,12 +12,12 @@ export const searchAtom = atom<ISearch>({
             value: ('0' + (new Date().getMonth() + 1)).slice(-2),
             label: ('' + (new Date().getMonth() + 1)).slice(-2) + '월',
         },
-        cctvName: undefined,
-        cctvCode: undefined,
-        cctvAddr: undefined,
-        cctvTSGB: undefined,
-        equiCd: undefined,
-        equiNm: undefined,
-        equiAddr: undefined
+        cctvName: null,
+        cctvCode: null,
+        cctvAddr: null,
+        cctvTSGB: null,
+        equiCd: null,
+        equiNm: null,
+        equiAddr: null
     }
 });

@@ -1,13 +1,13 @@
 export interface ISearch {
     yyyy: ISearchData;
     mm: ISearchData;
-    cctvName: ISearchData | undefined | null;
-    cctvCode: ISearchData | undefined | null;
-    cctvAddr: ISearchData | undefined | null;
-    cctvTSGB: ISearchData | undefined | null;
-    equiCd: ISearchData | undefined | null;
-    equiNm: ISearchData | undefined | null;
-    equiAddr: ISearchData | undefined | null;
+    cctvName: ISearchData | null;
+    cctvCode: ISearchData | null;
+    cctvAddr: ISearchData | null;
+    cctvTSGB: ISearchData | null;
+    equiCd: ISearchData | null;
+    equiNm: ISearchData | null;
+    equiAddr: ISearchData | null;
 }
 
 export interface ISearchData {

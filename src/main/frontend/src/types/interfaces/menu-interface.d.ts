@@ -1,15 +1,34 @@
 export interface IMenu {
     isMenuOpened: boolean;
     xPosition: number;
-    parentMenu: IPMenu_detail | undefined | null;
-    childMenu: ICMenu_detail | undefined | null;
+    parentMenu: IPMenu_detail | null;
+    childMenu: ICMenu_detail | null;
     immediately: boolean;
 }
 
 export interface IMenuBar {
-    PARENT_MENU: IPMenu;
-    CHILD_MENU: ICMenu;
+    PARENT_MENU: Record<string, IPMenu_detail>;
+    CHILD_MENU: Record<string, ICMenu_detail>;
 }
+
+export interface IMenu_detail {
+    id: string;
+    name: string;
+}
+
+export interface IMenuWithIcon extends IMenu_detail {
+    icon: any;
+}
+
+export interface IPMenu_detail extends IMenuWithIcon {
+    cMenu: string[];
+}
+
+export interface ICMenu_detail extends IMenu_detail {
+    link: string;
+}
+
+//
 
 export interface IPMenu {
     [key: string]: IPMenu_detail;
@@ -25,17 +44,4 @@ export interface ICMenu {
     MTS102: ICMenu_detail;
     MEM101: ICMenu_detail;
     MEM102: ICMenu_detail;
-}
-
-export interface IPMenu_detail {
-    id: string;
-    name: string;
-    icon: any;
-    cMenu: string[];
-}
-
-export interface ICMenu_detail {
-    id: string;
-    name: string;
-    link: string;
 }

@@ -39,7 +39,6 @@ const MSY101 = () => {
         {
             enabled: false,
             onSuccess: (data) => {
-                console.log("resultQuery_signIn : " + JSON.stringify(data));
                 const rData = data?.data;
                 const rHeaders = data?.headers;
 

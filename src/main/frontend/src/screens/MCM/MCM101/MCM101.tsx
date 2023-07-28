@@ -67,7 +67,7 @@ const MCM101 = () => {
         setRcMenu((prev) => ({
             ...prev,
             parentMenu: EMenuBar.PARENT_MENU[key.substr(0, 2)],
-            childMenu: EMenuBar.CHILD_MENU[key],
+            childMenu: EMenuBar.CHILD_MENU[key]
         }));
 
         closeMenuBar();

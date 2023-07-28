@@ -39,8 +39,8 @@ interface IResult_SelectMTS102T1 {
 interface IParam_UpdateTROU {
     id: string;
     trou_acto_stts_cd: string;
-    trou_gb_acto_cd: ISearchData | null | undefined;
-    trou_acto_meth_cd: ISearchData | null | undefined;
+    trou_gb_acto_cd: ISearchData | null;
+    trou_acto_meth_cd: ISearchData | null;
     trou_acto_dd: Date;
     trou_actr_nm: string;
     trou_acto_cont: string;

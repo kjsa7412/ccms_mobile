@@ -39,7 +39,6 @@ function App() {
                 setRcFirst({isFirst: false});
             },
             onError: () => {
-                console.log("resultQuery_silentSignIn onError");
                 resetUser();
                 resetSignInfo();
                 setRcFirst({isFirst: false});
