@@ -1,25 +1,21 @@
 import './ModalAlert.css';
+import {useRecoilState, useResetRecoilState} from "recoil";
+import {modalAlertAtom} from "../../atoms/modalAlertAtom";
+import {IModalAlert} from "@custom-interfaces/modal-interface";
 
-type Props = {
-    modalIsOpen: boolean;
-    funcCloseModal: Function;
-    message: string;
-}
-
-const modalAlert = ({modalIsOpen, funcCloseModal, message}: Props) => {
-    const CloseModal = () => {
-        funcCloseModal(false);
-    };
+const ModalAlert = () => {
+    const [rcModalAlert] = useRecoilState<IModalAlert>(modalAlertAtom);
+    const resetRcModalAlert = useResetRecoilState(modalAlertAtom);
 
     return (
         <>
-            {modalIsOpen &&
+            {rcModalAlert.isOpen &&
                 <div className={"modalAlert-overlay"}>
                     <div className={"modalAlert-modal"}>
                         <div className={"modalAlert-textContainer"}>
-                            <p>{message}</p>
+                            <p>{rcModalAlert.message}</p>
                         </div>
-                        <div className={"modalAlert-ok"} onClick={CloseModal}>
+                        <div className={"modalAlert-ok"} onClick={resetRcModalAlert}>
                             확인
                         </div>
                     </div>
@@ -30,4 +26,4 @@ const modalAlert = ({modalIsOpen, funcCloseModal, message}: Props) => {
 }
 
 
-export default modalAlert;
+export default ModalAlert;

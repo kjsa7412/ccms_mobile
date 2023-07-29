@@ -11,8 +11,3 @@ export interface IPostData {
     title: string;
     contents: string;
 }
-
-export interface IModalAlert {
-    isOpen: boolean;
-    message: string;
-}

@@ -10,9 +10,11 @@ import LoadingPost from "../../../components/loading/LoadingPost";
 import Post from "../../../components/post/Post";
 
 const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number }) => {
+    // data
     const [, setRcMEM101] = useRecoilState<IMEM101>(mem101Atom);
     const [rcSearch,] = useRecoilState<ISearch>(searchAtom);
 
+    // fucntion
     const setId = (id: string) => {
         setRcMEM101((prev) => ({...prev, id: id}));
     }

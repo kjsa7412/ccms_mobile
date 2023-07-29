@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import ScreenContainer from "../../../components/containers/ScreenContainer";
 import PageTitle from "../../../components/PageTitle";
 import HeaderBase from "../../../components/header/HeaderBase";
@@ -20,22 +20,18 @@ import Input from "../../../components/input/Input";
 import {EBlank, EInput, EModalMutationStatus} from "@custom-enums/common-enum";
 import InputContainer from "../../../components/containers/InputContainer";
 import UpsertSubmitButton from "../../../components/button/UpsertSubmitButton";
-import {IModalAlert} from "@custom-interfaces/common-interface";
-import ModalAlert from "../../../components/modal/ModalAlert";
-import ModalMutation from "../../../components/modal/ModalMutation";
-import {useNavigate} from "react-router-dom";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
 import Blank from "../../../components/Blank";
+import {modalAlertAtom} from "../../../atoms/modalAlertAtom";
+import {IModalAlert, IModalMutation} from "@custom-interfaces/modal-interface";
+import {modalMutationAtom} from "../../../atoms/modalMutationAtom";
 
 const MTS101T1 = () => {
     // data
-    const navigate = useNavigate();
     const [rcMenu,] = useRecoilState<IMenu>(menuAtom);
     const [rcMTS101,] = useRecoilState<IMTS101>(mts101Atom);
-    const [modalAlert, setModalAlert] = useState<IModalAlert>({isOpen: false, message: ""});
-    const [modalMutationStatus, setModalMutationStatus] = useState<EModalMutationStatus>(
-        EModalMutationStatus.Close,
-    );
+    const [, setRcModalAlert] = useRecoilState<IModalAlert>(modalAlertAtom);
+    const [, setRcModalMutation] = useRecoilState<IModalMutation>(modalMutationAtom);
 
     // form
     const methods = useForm({
@@ -65,13 +61,25 @@ const MTS101T1 = () => {
         {
             onSuccess: (data, variables, context) => {
                 if (data.data.IsError) {
-                    setModalMutationStatus(EModalMutationStatus.Error);
+                    setRcModalMutation(() => ({
+                        resultMutation: resultMutation_insertTROU,
+                        message: "등록",
+                        modalMutationStatus: EModalMutationStatus.Error
+                    }));
                 } else {
-                    setModalMutationStatus(EModalMutationStatus.Success);
+                    setRcModalMutation(() => ({
+                        resultMutation: resultMutation_insertTROU,
+                        message: "등록",
+                        modalMutationStatus: EModalMutationStatus.Success
+                    }));
                 }
             },
             onError: (error, variables, context) => {
-                setModalMutationStatus(EModalMutationStatus.Error);
+                setRcModalMutation(() => ({
+                    resultMutation: resultMutation_insertTROU,
+                    message: "등록",
+                    modalMutationStatus: EModalMutationStatus.Error
+                }));
             },
         },
     )
@@ -83,20 +91,17 @@ const MTS101T1 = () => {
         const data = methods.getValues();
 
         if (!data.trou_gb_acto_cd) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '장애구분을 선택해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '장애구분을 선택해주세요.'}));
             return;
         }
 
         if (!data.trou_acto_meth_cd) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '처리방법을 선택해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '처리방법을 선택해주세요.'}));
             return;
         }
 
         if (!data.trou_acto_dd) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '처리일자를 선택해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '처리일자를 선택해주세요.'}));
             return;
         }
 
@@ -106,36 +111,28 @@ const MTS101T1 = () => {
 
 
         if (!data.trou_actr_nm) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '처리자를 작성해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '처리자를 작성해주세요.'}));
             return;
         }
 
 
         if (!data.trou_acto_cont) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '처리내용을 작성해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '처리내용을 작성해주세요.'}));
             return;
         }
 
         if (validation) {
-            setModalMutationStatus(EModalMutationStatus.Confirm);
+            setRcModalMutation(() => ({
+                resultMutation: resultMutation_insertTROU,
+                message: "등록",
+                modalMutationStatus: EModalMutationStatus.Confirm
+            }));
         }
     };
 
     return (
         <ScreenContainer>
             <PageTitle title={'MTS101T1'}/>
-            <ModalAlert modalIsOpen={modalAlert.isOpen}
-                        funcCloseModal={setModalAlert}
-                        message={modalAlert.message}/>
-            <ModalMutation
-                modalMutationStatus={modalMutationStatus}
-                setModalMutationStatus={setModalMutationStatus}
-                resultMutation={resultMutation_insertTROU}
-                successFunction={() => {
-                    !!rcMenu.childMenu?.link ? navigate(rcMenu.childMenu.link) : navigate('/');
-                }}/>
             <HeaderBase left={[<HeaderClose closePath={!!rcMenu.childMenu?.link ? rcMenu.childMenu.link : '/'}/>]}
                         center={[<HeaderTitle title={'장애처리'}/>]}/>
             <FormProvider {...methods}>

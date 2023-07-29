@@ -58,7 +58,11 @@ export const getYYYY_MM_DD = (date: any) => {
     );
 };
 
-export const formattedDate = (data: string) => {
+export const formattedDate = (data: string | undefined) => {
+    if (!data) {
+        return "";
+    }
+
     // 년, 월, 일, 시, 분 추출
     const year = data.slice(0, 4);
     const month = data.slice(4, 6);

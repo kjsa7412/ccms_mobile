@@ -16,6 +16,8 @@ import SignInput from "../../../components/input/SignInput";
 import Blank from "../../../components/Blank";
 import {EBlank} from "@custom-enums/common-enum";
 import {theme1} from "../../../styles/theme";
+import {modalAlertAtom} from "../../../atoms/modalAlertAtom";
+import {modalMutationAtom} from "../../../atoms/modalMutationAtom";
 
 const MSY101 = () => {
     // data
@@ -26,13 +28,17 @@ const MSY101 = () => {
     const [, setRcFirst] = useRecoilState<IFirst>(firstAtom);
     const resetUser = useResetRecoilState(userAtom);
     const resetSignInfo = useResetRecoilState(signInfoAtom);
+    const resetModalAlert = useResetRecoilState(modalAlertAtom);
+    const restModalMutation = useResetRecoilState(modalMutationAtom);
     const [inputData, setInputData] = useState<{ id: string; pw: string }>({id: '', pw: ''});
 
+    // form
     const methods = useForm({
         mode: 'onSubmit',
         defaultValues: inputData,
     });
 
+    // qqyery
     const resultQuery_signIn = useQuery(
         [EQueryKey.MSY101_signIn],
         () => signIn(inputData.id, inputData.pw),
@@ -70,6 +76,7 @@ const MSY101 = () => {
             }
         })
 
+    // function
     const onSignIn = async () => {
         const {id, pw} = methods.getValues();
         setInputData({id: id, pw: pw});
@@ -87,6 +94,12 @@ const MSY101 = () => {
         }
     };
 
+    // effect
+    useEffect(() => {
+        resetModalAlert();
+        restModalMutation();
+    }, []);
+
     useEffect(() => {
         if (!!inputData?.id && !!inputData?.pw) {
             resultQuery_signIn.refetch();
@@ -94,8 +107,7 @@ const MSY101 = () => {
         return () => {
         };
     }, [inputData]);
-
-
+    
     return (
         <ScreenContainer isColor={true}>
             <PageTitle title="Login" themeColor={theme1.color.mainColor_m1}/>

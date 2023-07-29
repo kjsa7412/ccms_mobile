@@ -12,9 +12,11 @@ import LoadingPost from "../../../components/loading/LoadingPost";
 
 
 const MTS101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number }) => {
+    // data
     const [, setRcMTS101] = useRecoilState<IMTS101>(mts101Atom);
     const [rcSearch,] = useRecoilState<ISearch>(searchAtom);
 
+    // function
     const setId = (id: string) => {
         setRcMTS101((prev) => ({...prev, id: id}));
     }

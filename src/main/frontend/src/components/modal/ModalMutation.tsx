@@ -1,41 +1,49 @@
 import './ModalMutation.css';
 import {EModalMutationStatus} from "@custom-enums/common-enum";
+import {useRecoilState} from "recoil";
+import {IModalMutation} from "@custom-interfaces/modal-interface";
+import {modalMutationAtom} from "../../atoms/modalMutationAtom";
+import {IMenu} from "@custom-interfaces/menu-interface";
+import {menuAtom} from "../../atoms/menuAtom";
+import {useNavigate} from "react-router-dom";
 
-type Props = {
-    modalMutationStatus: string;
-    setModalMutationStatus: Function;
-    resultMutation: any;
-    successFunction: Function;
-}
+const ModalMutation = () => {
+    const navigate = useNavigate();
+    const [rcMenu,] = useRecoilState<IMenu>(menuAtom);
+    const [rcModalMutation, setRcModalMutation] = useRecoilState<IModalMutation>(modalMutationAtom);
 
-const modalMutation = ({
-                           modalMutationStatus,
-                           setModalMutationStatus,
-                           resultMutation,
-                           successFunction
-                       }: Props) => {
+    const successFunction = () => {
+        !!rcMenu.childMenu?.link ? navigate(rcMenu.childMenu.link) : navigate('/');
+    }
+
     return (
         <>
             {
-                modalMutationStatus !== EModalMutationStatus.Close &&
+                rcModalMutation.modalMutationStatus !== EModalMutationStatus.Close &&
                 <div className={"modalAlert-overlay"}>
                     <div className={"modalAlert-modal"}>
-                        {modalMutationStatus === EModalMutationStatus.Confirm && (
+                        {rcModalMutation.modalMutationStatus === EModalMutationStatus.Confirm && (
                             <>
                                 <div className={"modalMutation-textContainer"}>
-                                    <p>진행하시겠습니까?</p>
+                                    <p>{rcModalMutation.message + "하시겠습니까?"}</p>
                                 </div>
                                 <div className={"modalMutation-button"}
                                      onClick={() => {
-                                         setModalMutationStatus(EModalMutationStatus.Progress);
-                                         resultMutation.mutate();
+                                         setRcModalMutation((prev) => ({
+                                             ...prev,
+                                             modalMutationStatus: EModalMutationStatus.Progress
+                                         }));
+                                         rcModalMutation.resultMutation.mutate();
                                      }}
                                 >
                                     확인
                                 </div>
                                 <div className={"modalMutation-button"}
                                      onClick={() => {
-                                         setModalMutationStatus(EModalMutationStatus.Close);
+                                         setRcModalMutation((prev) => ({
+                                             ...prev,
+                                             modalMutationStatus: EModalMutationStatus.Close
+                                         }));
                                      }}
                                 >
                                     취소
@@ -43,10 +51,10 @@ const modalMutation = ({
                             </>
                         )}
 
-                        {modalMutationStatus === EModalMutationStatus.Progress && (
+                        {rcModalMutation.modalMutationStatus === EModalMutationStatus.Progress && (
                             <>
                                 <div className={"modalMutation-textContainer"}>
-                                    <p>처리중입니다.</p>
+                                    <p>{rcModalMutation.message + "중입니다."}</p>
                                 </div>
                                 <div className={"modalMutation-button"}>
                                     <img alt={'spinner'} src={`${process.env.PUBLIC_URL}/img/Spinner-1s-38px.gif`}/>
@@ -54,15 +62,18 @@ const modalMutation = ({
                             </>
                         )}
 
-                        {modalMutationStatus === EModalMutationStatus.Success && (
+                        {rcModalMutation.modalMutationStatus === EModalMutationStatus.Success && (
                             <>
                                 <div className={"modalMutation-textContainer"}>
-                                    <p>처리되었습니다.</p>
+                                    <p>{rcModalMutation.message + "되었습니다."}</p>
                                 </div>
                                 <div className={"modalMutation-button"}
                                      onClick={() => {
-                                         resultMutation.reset();
-                                         setModalMutationStatus(EModalMutationStatus.Close);
+                                         setRcModalMutation((prev) => ({
+                                             ...prev,
+                                             modalMutationStatus: EModalMutationStatus.Close
+                                         }));
+                                         rcModalMutation.resultMutation.reset();
                                          successFunction();
                                      }}
                                 >
@@ -71,7 +82,7 @@ const modalMutation = ({
                             </>
                         )}
 
-                        {modalMutationStatus === EModalMutationStatus.Error && (
+                        {rcModalMutation.modalMutationStatus === EModalMutationStatus.Error && (
                             <>
                                 <div className={"modalMutation-textContainer"}>
                                     <p>실패했습니다.</p>
@@ -79,8 +90,11 @@ const modalMutation = ({
                                 <div className={"modalMutation-button"}
                                      color={'red'}
                                      onClick={() => {
-                                         resultMutation.reset();
-                                         setModalMutationStatus(EModalMutationStatus.Close);
+                                         setRcModalMutation((prev) => ({
+                                             ...prev,
+                                             modalMutationStatus: EModalMutationStatus.Close
+                                         }));
+                                         rcModalMutation.resultMutation.reset();
                                      }}
                                 >
                                     확인
@@ -94,4 +108,4 @@ const modalMutation = ({
     )
 }
 
-export default modalMutation;
+export default ModalMutation;

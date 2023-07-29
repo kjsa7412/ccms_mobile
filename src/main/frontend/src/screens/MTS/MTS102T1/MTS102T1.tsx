@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import ScreenContainer from "../../../components/containers/ScreenContainer";
 import PageTitle from "../../../components/PageTitle";
 import HeaderBase from "../../../components/header/HeaderBase";
@@ -6,39 +6,33 @@ import {HeaderClose, HeaderDelete, HeaderTitle} from "../../../components/header
 import {useRecoilState} from "recoil";
 import {IMenu} from "@custom-interfaces/menu-interface";
 import {menuAtom} from "../../../atoms/menuAtom";
-import {useNavigate} from "react-router-dom";
-import {IModalAlert} from "@custom-interfaces/common-interface";
 import {EBlank, EInput, EModalMutationStatus} from "@custom-enums/common-enum";
 import {mts102Atom} from "../../../atoms/MTS102/mts102Atom";
 import {IMTS102} from "@custom-interfaces/MTS102/mts102-interface";
 import {FormProvider, useForm} from "react-hook-form";
-import {initData} from "../MTS102T1/MTS102T1_FORM";
+import {initData, loadData} from "../MTS102T1/MTS102T1_FORM";
 import {useMutation, useQuery} from "react-query";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
 import {deleteTROU, selectMTS102T1, updateTROU, selectTSGBForSearch, selectTSMETHForSearch} from "./MTS102T1_API";
-import ModalAlert from "../../../components/modal/ModalAlert";
-import ModalMutation from "../../../components/modal/ModalMutation";
 import ScreenLabel from "../../../components/label/ScreenLabel";
 import LoadingPost from "../../../components/loading/LoadingPost";
 import RowContents from "../../../components/contents/RowContents";
-import {formattedDate, parseDateStringToDate} from "../../../utils/HandleDateFormat";
+import {formattedDate} from "../../../utils/HandleDateFormat";
 import InputContainer from "../../../components/containers/InputContainer";
 import Input from "../../../components/input/Input";
 import UpsertSubmitButton from "../../../components/button/UpsertSubmitButton";
 import Blank from "../../../components/Blank";
+import {IModalAlert, IModalMutation} from "@custom-interfaces/modal-interface";
+import {modalAlertAtom} from "../../../atoms/modalAlertAtom";
+import {modalMutationAtom} from "../../../atoms/modalMutationAtom";
 
 const MTS102T1 = () => {
     // data
-    const navigate = useNavigate();
     const [rcMenu,] = useRecoilState<IMenu>(menuAtom);
     const [rcMTS102,] = useRecoilState<IMTS102>(mts102Atom);
-    const [modalAlert, setModalAlert] = useState<IModalAlert>({isOpen: false, message: ""});
-    const [modalMutationStatus, setModalMutationStatus] = useState<EModalMutationStatus>(
-        EModalMutationStatus.Close,
-    );
-    const [modalDeleteMutationStatus, setModalDeleteMutationStatus] = useState<EModalMutationStatus>(
-        EModalMutationStatus.Close,
-    );
+    const [, setRcModalAlert] = useRecoilState<IModalAlert>(modalAlertAtom);
+    const [, setRcModalMutation] = useRecoilState<IModalMutation>(modalMutationAtom);
+
 
     // form
     const methods = useForm({
@@ -52,20 +46,7 @@ const MTS102T1 = () => {
         () => selectMTS102T1({id: rcMTS102.id}),
         {
             onSuccess: (data) => {
-                let inputData = data?.data?.Content[0];
-
-                methods.setValue("trou_acto_stts_cd", inputData.trou_acto_stts_cd);
-                methods.setValue("trou_gb_acto_cd", {
-                    value: inputData.trou_gb_acto_cd,
-                    label: inputData.trou_gb_acto_nm
-                });
-                methods.setValue("trou_acto_meth_cd", {
-                    value: inputData.trou_acto_meth_cd,
-                    label: inputData.trou_acto_meth_nm
-                });
-                methods.setValue("trou_acto_dd", parseDateStringToDate(inputData.trou_acto_dd + inputData.trou_acto_hrti));
-                methods.setValue("trou_actr_nm", inputData.trou_actr_nm);
-                methods.setValue("trou_acto_cont", inputData.trou_acto_cont);
+                !!data?.data?.Content[0] && loadData(methods, data?.data?.Content[0]);
             }
         }
     );
@@ -86,13 +67,25 @@ const MTS102T1 = () => {
         {
             onSuccess: (data, variables, context) => {
                 if (data.data.IsError) {
-                    setModalMutationStatus(EModalMutationStatus.Error);
+                    setRcModalMutation(() => ({
+                        resultMutation: resultMutation_updateTROU,
+                        message: "수정",
+                        modalMutationStatus: EModalMutationStatus.Error
+                    }));
                 } else {
-                    setModalMutationStatus(EModalMutationStatus.Success);
+                    setRcModalMutation(() => ({
+                        resultMutation: resultMutation_updateTROU,
+                        message: "수정",
+                        modalMutationStatus: EModalMutationStatus.Success
+                    }));
                 }
             },
             onError: (error, variables, context) => {
-                setModalMutationStatus(EModalMutationStatus.Error);
+                setRcModalMutation(() => ({
+                    resultMutation: resultMutation_updateTROU,
+                    message: "수정",
+                    modalMutationStatus: EModalMutationStatus.Error
+                }));
             },
         },
     )
@@ -102,13 +95,25 @@ const MTS102T1 = () => {
         {
             onSuccess: (data, variables, context) => {
                 if (data.data.IsError) {
-                    setModalDeleteMutationStatus(EModalMutationStatus.Error);
+                    setRcModalMutation(() => ({
+                        resultMutation: resultMutation_deleteTROU,
+                        message: "삭제",
+                        modalMutationStatus: EModalMutationStatus.Error
+                    }));
                 } else {
-                    setModalDeleteMutationStatus(EModalMutationStatus.Success);
+                    setRcModalMutation(() => ({
+                        resultMutation: resultMutation_deleteTROU,
+                        message: "삭제",
+                        modalMutationStatus: EModalMutationStatus.Success
+                    }));
                 }
             },
             onError: (error, variables, context) => {
-                setModalDeleteMutationStatus(EModalMutationStatus.Error);
+                setRcModalMutation(() => ({
+                    resultMutation: resultMutation_deleteTROU,
+                    message: "삭제",
+                    modalMutationStatus: EModalMutationStatus.Error
+                }));
             },
         },
     )
@@ -120,20 +125,17 @@ const MTS102T1 = () => {
         const data = methods.getValues();
 
         if (!data.trou_gb_acto_cd) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '장애구분을 선택해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '장애구분을 선택해주세요.'}));
             return;
         }
 
         if (!data.trou_acto_meth_cd) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '처리방법을 선택해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '처리방법을 선택해주세요.'}));
             return;
         }
 
         if (!data.trou_acto_dd) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '처리일자를 선택해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '처리일자를 선택해주세요.'}));
             return;
         }
 
@@ -143,47 +145,36 @@ const MTS102T1 = () => {
 
 
         if (!data.trou_actr_nm) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '처리자를 작성해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '처리자를 작성해주세요.'}));
             return;
         }
 
 
         if (!data.trou_acto_cont) {
-            validation = false;
-            setModalAlert({isOpen: true, message: '처리내용을 작성해주세요.'});
+            setRcModalAlert((prev) => ({isOpen: true, message: '처리내용을 작성해주세요.'}));
             return;
         }
 
         if (validation) {
-            setModalMutationStatus(EModalMutationStatus.Confirm);
+            setRcModalMutation(() => ({
+                resultMutation: resultMutation_updateTROU,
+                message: "수정",
+                modalMutationStatus: EModalMutationStatus.Confirm
+            }));
         }
     };
 
     return (
         <ScreenContainer>
             <PageTitle title={'MTS102T1'}/>
-            <ModalAlert modalIsOpen={modalAlert.isOpen}
-                        funcCloseModal={setModalAlert}
-                        message={modalAlert.message}/>
-            <ModalMutation
-                modalMutationStatus={modalMutationStatus}
-                setModalMutationStatus={setModalMutationStatus}
-                resultMutation={resultMutation_updateTROU}
-                successFunction={() => {
-                    !!rcMenu.childMenu?.link ? navigate(rcMenu.childMenu.link) : navigate('/');
-                }}/>
-            <ModalMutation
-                modalMutationStatus={modalDeleteMutationStatus}
-                setModalMutationStatus={setModalDeleteMutationStatus}
-                resultMutation={resultMutation_deleteTROU}
-                successFunction={() => {
-                    !!rcMenu.childMenu?.link ? navigate(rcMenu.childMenu.link) : navigate('/');
-                }}/>
             <HeaderBase left={[<HeaderClose closePath={!!rcMenu.childMenu?.link ? rcMenu.childMenu.link : '/'}/>]}
                         center={[<HeaderTitle title={'장애처리'}/>]}
                         right={[<HeaderDelete
-                            onClick={() => setModalDeleteMutationStatus(EModalMutationStatus.Confirm)}/>]}
+                            onClick={() => setRcModalMutation(() => ({
+                                resultMutation: resultMutation_deleteTROU,
+                                message: "삭제",
+                                modalMutationStatus: EModalMutationStatus.Confirm
+                            }))}/>]}
             />
             <FormProvider {...methods}>
                 <form style={{

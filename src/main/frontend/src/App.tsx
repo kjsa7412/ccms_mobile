@@ -16,6 +16,8 @@ import {menuAtom} from "./atoms/menuAtom";
 import {registerAccessTokenOfHeader} from "./utils/HandleSign";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
 import Authentication from "./components/authentication/Authentication";
+import ModalAlert from "./components/modal/ModalAlert";
+import ModalMutation from "./components/modal/ModalMutation";
 
 function App() {
     setAxios();
@@ -72,21 +74,21 @@ function App() {
     window.history.pushState(null, '', window.location.href);
 
     return (
-        <>
+        <AppContainer>
             {rcFirst.isFirst &&
             ((resultQuery_silentSignIn.status !== 'success' &&
                     resultQuery_silentSignIn.status !== 'idle') ||
                 resultQuery_silentSignIn.isFetching) ? (
-                <AppContainer>
-                    <Authentication/>
-                </AppContainer>
+                <Authentication/>
             ) : (
-                <AppContainer>
+                <>
                     <MCM101/>
+                    <ModalAlert/>
+                    <ModalMutation/>
                     <AppRouter isSignIn={rcSignInfo.isLogin}/>
-                </AppContainer>
+                </>
             )}
-        </>
+        </AppContainer>
     );
 }
 

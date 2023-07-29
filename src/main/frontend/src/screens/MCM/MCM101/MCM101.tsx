@@ -17,6 +17,7 @@ import {EQueryKey} from "@custom-enums/queryKey_enum";
 import Icons from "../../../components/Icons";
 
 const MCM101 = () => {
+    // data
     const navigate = useNavigate();
     const resetUser = useResetRecoilState(userAtom);
     const resetSignInfo = useResetRecoilState(signInfoAtom);
@@ -26,6 +27,7 @@ const MCM101 = () => {
         new Map([[EMenuBar.PARENT_MENU.MTS.id, EMenuBar.PARENT_MENU.MTS.id]]),
     );
 
+    // query
     const resultQuery_signOut = useQuery(
         [EQueryKey.MCM101_signOut],
         () => signOut(rcUser.userId),
@@ -33,6 +35,7 @@ const MCM101 = () => {
             enabled: false
         });
 
+    // fucntion
     const closeMenuBar = () => {
         if (rcMenu.isMenuOpened === true) {
             setRcMenu((prev) => ({
