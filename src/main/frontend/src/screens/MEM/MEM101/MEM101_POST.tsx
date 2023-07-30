@@ -72,12 +72,12 @@ const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
 
                                     const params = [
                                         {
-                                            title: '장비코드',
-                                            contents: value.equi_cd,
+                                            title: 'MainTitle',
+                                            contents: value.equi_nm,
                                         },
                                         {
-                                            title: '장비명',
-                                            contents: value.equi_nm,
+                                            title: '장비코드',
+                                            contents: value.equi_cd,
                                         },
                                         {
                                             title: '제조사',

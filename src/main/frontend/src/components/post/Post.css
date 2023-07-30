@@ -3,13 +3,22 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 10px;
     border: none;
     border-radius: 3px;
+    box-sizing: border-box;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1),
-    -5px -5px 20px rgba(255, 255, 255, 0.3);
+    -5px -5px 20px rgba(255, 255, 255, 0.1);
 }
 
-.post-bodyContainer {
+.post-MainTitle {
+    width: 100%;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.post-itemContainer {
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -18,43 +27,26 @@
 .post-title {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 20%;
-    min-height: 30px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 60px;
+    min-height: 25px;
     border: none;
-    background: var(--main-color);
-    font-size: 13px;
-    color: white;
-}
-
-.post-title.first {
-    border-radius: 3px 0px 0px 0px;
-}
-
-.post-title.last {
-    border-radius: 0px 0px 0px 3px;
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
 }
 
 .post-contents {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
-    width: 75%;
-    min-height: 30px;
+    flex: 1;
+    min-height: 25px;
     border: none;
     background: white;
-    font-size: 13px;
+    font-size: 12px;
     color: black;
-    padding: 7px;
     word-break: break-word; /* 줄 바꿈을 위한 속성 추가 */
-}
-
-.post-contents.first {
-    border-radius: 0px 5px 0px 0px;
-}
-
-.post-contents.last {
-    border-radius: 0px 0px 5px 0px;
 }

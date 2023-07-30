@@ -67,7 +67,7 @@ const MTS102_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
 
                                     const params = [
                                         {
-                                            title: 'CCTV명',
+                                            title: 'MainTitle',
                                             contents: value.equi_nm,
                                         },
                                         {

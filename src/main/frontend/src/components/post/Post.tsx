@@ -12,15 +12,24 @@ const Post = ({postData, link, onClick}: Props) => {
     return (
         <Link className={"post-baseContainer"} to={link} onClick={onClick}>
             {postData.map((value: IPostData, index) => (
-                <div key={index} className={"post-bodyContainer"}>
-                    <div className={`post-title ${index === 0 && "first"} ${index === postData.length - 1 && "last"}`}>
-                        {value.title}
-                    </div>
-                    <div
-                        className={`post-contents ${index === 0 && "first"} ${index === postData.length - 1 && "last"}`}>
-                        {value.contents}
-                    </div>
-                </div>
+                <>
+                    {
+                        value.title === 'MainTitle' ?
+                            <div key={index + "MainTitle"} className={"post-MainTitle"}>
+                                {value.contents}
+                            </div> :
+                            <div key={index} className={"post-itemContainer"}>
+                                <div
+                                    className={"post-title"}>
+                                    {value.title}
+                                </div>
+                                <div
+                                    className={"post-contents"}>
+                                    {value.contents}
+                                </div>
+                            </div>
+                    }
+                </>
             ))}
         </Link>
     );
