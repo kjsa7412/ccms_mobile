@@ -46,6 +46,7 @@ const MEM102 = () => {
                     const content = document.createElement('div');
                     content.innerHTML = `
                         <div class="mem102-infoContainer">
+                            <div class="mem102-itemContainer"><div class="mem102-title">장비명</div><div class="mem102-contents">${feature.get('equi_nm')}</div></div>
                             <div class="mem102-itemContainer"><div class="mem102-title">장비코드</div><div class="mem102-contents">${feature.get('equi_cd')}</div></div>
                             <div class="mem102-itemContainer"><div class="mem102-title">제조사</div><div class="mem102-contents">${feature.get('manu_comp')}</div></div>
                             <div class="mem102-itemContainer"><div class="mem102-title">설치주소</div><div class="mem102-contents">${feature.get('inst_addr')}</div></div>
@@ -67,8 +68,8 @@ const MEM102 = () => {
             ...value
         });
         marker.setStyle(new Style({
-            text: new Text({text: value.equi_nm, font: '15px Noto Sans KR', offsetY: 15, padding: [5, 5, 5, 5]}),
-            image: new Icon({anchor: [0.5, 1], src: "img/cctv-40px.png", scale: 0.3})
+            text: new Text({text: value.equi_nm, font: '13px Noto Sans KR', offsetY: 15, padding: [5, 5, 5, 5]}),
+            image: new Icon({anchor: [0.5, 1], src: "img/cctv-40px.png", scale: 0.2})
         }));
         return marker;
     });

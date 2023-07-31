@@ -62,6 +62,7 @@
 
 .input-textarea::placeholder {
     font-size: 10px;
+    color: grey;
 }
 
 .input-textareaMini {
@@ -79,6 +80,7 @@
 
 .input-textareaMini::placeholder {
     font-size: 10px;
+    color: grey;
 }
 
 .input-radioContainer {
@@ -147,4 +149,5 @@
 
 .input-datePicker::placeholder {
     font-size: 10px;
+    color: grey;
 }

@@ -39,7 +39,7 @@ const Input = ({
 
     const placeholderComponent = (
         <div>
-            <span style={{color: 'gray', fontSize: 8}}>{title}</span>
+            <span style={{color: 'gray', fontSize: 10}}>{title}</span>
         </div>
     );
 
@@ -112,6 +112,7 @@ const Input = ({
                             timeCaption="Time" // 시간 선택 레이블
                             closeOnScroll={true}
                             placeholderText={'점검일자'}
+                            onFocus={e => e.target.blur()} // <--- Adding this
                             {...field}
                         />
                     )}
