@@ -1,0 +1,66 @@
+.mem102-infoContainer {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    border-radius: 3px;
+    background: white;
+    padding: 15px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.01);
+    top: 35px;
+    left: -150px;
+}
+
+.mem102-itemContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.mem102-title {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-right: 10px;
+    width: 70px;
+    min-height: 20px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.mem102-contents {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex: 1;
+    min-height: 20px;
+    border: none;
+    font-size: 14px;
+    color: black;
+    word-break: break-word; /* 줄 바꿈을 위한 속성 추가 */
+}
+
+.mem102-container-parent {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: center;
+    width: 100%;
+    padding-right: 1em;
+    padding-left: 1em;
+    padding-top: 70px;
+    z-index: 1;
+    top: 0px;
+}
+
+.mem102-searchContainer-search {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 10px;
+}

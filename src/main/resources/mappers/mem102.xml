@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mem102">
-
+    <select id="selectCCTV" resultType="hashmap">
+        /*mem102.selectCCTV*/
+        select
+        equi_cd,
+        equi_nm,
+        manu_comp,
+        inst_addr,
+        lati,
+        logi
+        from ts_equi_mast
+        where use_yn = 'Y'
+        <if test="searchWord != null and searchWord != '' and searchWord != '*'.toString() ">
+            and ( equi_cd like '%' || #{searchWord} || '%'
+            or equi_nm like '%' || #{searchWord} || '%' )
+        </if>
+        order by comp_cd, equi_cd, equi_nm
+    </select>
 </mapper>

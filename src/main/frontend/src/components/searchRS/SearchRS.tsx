@@ -68,14 +68,14 @@ const SearchRS = ({
             fontSize: 13,
             borderRadius: 5,
             paddingLeft: 10,
+            opacity: 0.8
         }),
         input: (provided: any) => ({
             ...provided,
         }),
         option: (provided: any) => ({
             ...provided,
-            fontSize: 13,
-            lineHeight: 0.9
+            fontSize: 13
         }),
     };
 

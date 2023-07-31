@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "@types/lodash": "^4.14.196",
-    "lodash": "^4.17.21"
+    "@types/ol": "^7.0.0",
+    "lodash": "^4.17.21",
+    "ol": "^7.4.0"
   }
 }

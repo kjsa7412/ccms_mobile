@@ -49,7 +49,7 @@ public class AuthController {
             ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
                     .maxAge(7 * 24 * 60 * 60) // 최대 수명: 7일
                     .path("/") // 쿠키 경로: 모든 경로
-                    .secure(false) // true: HTTPS를 통해서만 접근 가능 -- todo : SSL 인증서 처리 후 true 변경
+                    .secure(true) // true: HTTPS를 통해서만 접근 가능 -- todo : SSL 인증서 처리 후 true 변경
                     .sameSite("None") // None: 모든 도메인에서 접근 가능
                     .httpOnly(true) // true: 클라이언트 측 JavaScript에서 접근 불가능
                     .build();
@@ -116,7 +116,7 @@ public class AuthController {
                     ResponseCookie responseCookie = ResponseCookie.from("refreshToken", refreshToken)
                             .maxAge(7 * 24 * 60 * 60) // 최대 수명: 7일
                             .path("/") // 쿠키 경로: 모든 경로
-                            .secure(false) // true: HTTPS를 통해서만 접근 가능 -- todo : SSL 인증서 처리 후 true 변경
+                            .secure(true) // true: HTTPS를 통해서만 접근 가능 -- todo : SSL 인증서 처리 후 true 변경
                             .sameSite("None") // None: 모든 도메인에서 접근 가능
                             .httpOnly(true) // true: 클라이언트 측 JavaScript에서 접근 불가능
                             .build();

@@ -12,13 +12,13 @@ const Post = ({postData, link, onClick}: Props) => {
     return (
         <Link className={"post-baseContainer"} to={link} onClick={onClick}>
             {postData.map((value: IPostData, index) => (
-                <>
+                <div key={index}>
                     {
                         value.title === 'MainTitle' ?
-                            <div key={index + "MainTitle"} className={"post-MainTitle"}>
+                            <div className={"post-MainTitle"}>
                                 {value.contents}
                             </div> :
-                            <div key={index} className={"post-itemContainer"}>
+                            <div className={"post-itemContainer"}>
                                 <div
                                     className={"post-title"}>
                                     {value.title}
@@ -29,7 +29,7 @@ const Post = ({postData, link, onClick}: Props) => {
                                 </div>
                             </div>
                     }
-                </>
+                </div>
             ))}
         </Link>
     );

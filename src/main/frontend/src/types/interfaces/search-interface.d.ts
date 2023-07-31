@@ -11,6 +11,6 @@ export interface ISearch {
 }
 
 export interface ISearchData {
-    value: string;
+    value: any;
     label: string;
 }
