@@ -5,7 +5,8 @@ import localStorageEffect from "../localStorageEffect";
 export const mts101Atom = atom<IMTS101>({
     key: 'mts101',
     default: {
-        id: ""
+        id: "",
+        atfi_id: ""
     },
     effects: [localStorageEffect('mts101')],
 });

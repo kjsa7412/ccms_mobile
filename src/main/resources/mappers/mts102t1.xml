@@ -65,7 +65,7 @@
             trou_acto_dd      = '',      -- 조치일자
             trou_acto_hrti    = '',      -- 조치시각
             trou_actr_nm      = '',      -- 처리자
-            trou_acto_cont    = ''       -- 처리내용
+            trou_acto_cont    = '',      -- 처리내용
             recall_dt         = null     -- 회수날짜
         where comp_cd = #{compCd}
           and trou_mngr_dd || '-' || trou_mngr_no = #{id}

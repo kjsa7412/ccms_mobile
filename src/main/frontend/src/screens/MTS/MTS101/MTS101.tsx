@@ -31,6 +31,7 @@ const MTS101 = () => {
     const [postMax, setPostMax] = useState(20);
     const [rcSearch, setRcSearch] = useRecoilState<ISearch>(searchAtom);
     const [, setRcMTS101] = useRecoilState<IMTS101>(mts101Atom);
+    const resetRcMTS101 = useResetRecoilState(mts101Atom);
     const resetRcSearch = useResetRecoilState(searchAtom);
 
     // query
@@ -45,7 +46,7 @@ const MTS101 = () => {
         resultQuery_selectMTS101.refetch();
 
         setRcSearch((prev) => ({...prev, cctvName: null, cctvTSGB: null}));
-        setRcMTS101((prev) => ({...prev, id: ""}));
+        resetRcMTS101();
 
         return () => {
             queryClient.cancelQueries(EQueryKey.MTS101_selectMTS101);

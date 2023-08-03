@@ -75,4 +75,22 @@
         group by inst_addr
         order by inst_addr
     </select>
+
+    <select id="selectAtfi" resultType="hashmap">
+        /* common.selectAtfi */
+        select comp_cd,
+               atfi_id,
+               atfi_seq,
+               reg_pgm_id,
+               serv_path,
+               serv_file_nm,
+               orig_file_nm,
+               file_exte,
+               file_size,
+               dele_yn
+        from sy_atfi_info
+        where comp_cd = #{compCd}
+          and atfi_id = #{atfi_id}
+          and dele_yn = 'N'
+    </select>
 </mapper>

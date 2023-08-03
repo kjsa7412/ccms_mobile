@@ -10,3 +10,8 @@ export interface IModalMutation {
     resultMutation: any;
     message: string;
 }
+
+export interface IModalImage {
+    isOpen: boolean;
+    src: string;
+}

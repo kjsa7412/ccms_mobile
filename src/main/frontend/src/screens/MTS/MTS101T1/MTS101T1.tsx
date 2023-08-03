@@ -10,7 +10,7 @@ import {IMTS101} from "@custom-interfaces/MTS101/mts101-interface";
 import {mts101Atom} from "../../../atoms/MTS101/mts101Atom";
 import {FormProvider, useForm} from 'react-hook-form';
 import {initData} from "./MTS101T1_FORM";
-import {insertTROU, selectMTS101T1, selectTSGBForSearch, selectTSMETHForSearch} from "./MTS101T1_API";
+import {insertTROU, selectAtfi, selectMTS101T1, selectTSGBForSearch, selectTSMETHForSearch} from "./MTS101T1_API";
 import {useMutation, useQuery} from 'react-query';
 import ScreenLabel from "../../../components/label/ScreenLabel";
 import LoadingPost from "../../../components/loading/LoadingPost";
@@ -25,6 +25,7 @@ import Blank from "../../../components/Blank";
 import {modalAlertAtom} from "../../../atoms/modalAlertAtom";
 import {IModalAlert, IModalMutation} from "@custom-interfaces/modal-interface";
 import {modalMutationAtom} from "../../../atoms/modalMutationAtom";
+import ImageListRow from "../../../components/imageList/ImageListRow";
 
 const MTS101T1 = () => {
     // data
@@ -43,6 +44,11 @@ const MTS101T1 = () => {
     const resultQuery_selectMTS101T1 = useQuery(
         [EQueryKey.MTS101T1_selectMTS101T1],
         () => selectMTS101T1({id: rcMTS101.id})
+    );
+
+    const resultQuery_selectAtfi = useQuery(
+        [EQueryKey.MTS101T1_selectAtfi],
+        () => selectAtfi({atfi_id: rcMTS101.atfi_id})
     );
 
     const resultQuery_selectTSGBForSearch = useQuery(
@@ -149,8 +155,10 @@ const MTS101T1 = () => {
                     <ScreenLabel title={'장애내역'}/>
                     {
                         resultQuery_selectMTS101T1.status !== 'success' ||
-                        resultQuery_selectMTS101T1.isFetching === true ?
-                            <LoadingPost pHeight={225}/> :
+                        resultQuery_selectMTS101T1.isFetching === true ||
+                        resultQuery_selectAtfi.status !== 'success' ||
+                        resultQuery_selectAtfi.isFetching === true ?
+                            <LoadingPost pHeight={325}/> :
                             <>
                                 <RowContents title={"장애관리번호"}
                                              contents={resultQuery_selectMTS101T1.data?.data?.Content?.[0]?.trou_mngr_dd_no}/>
@@ -170,6 +178,7 @@ const MTS101T1 = () => {
                                              contents={resultQuery_selectMTS101T1.data?.data?.Content?.[0]?.coer_dept_nm}/>
                                 <RowContents title={"장애내용"}
                                              contents={resultQuery_selectMTS101T1.data?.data?.Content?.[0]?.trou_cont}/>
+                                <ImageListRow atfi={resultQuery_selectAtfi.data.data.Content}/>
                             </>
                     }
                     <Blank type={EBlank.Row}/>

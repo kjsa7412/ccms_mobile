@@ -18,6 +18,7 @@ import {EQueryKey} from "@custom-enums/queryKey_enum";
 import Authentication from "./components/authentication/Authentication";
 import ModalAlert from "./components/modal/ModalAlert";
 import ModalMutation from "./components/modal/ModalMutation";
+import ModalImage from "./components/modal/ModalImage";
 
 function App() {
     setAxios();
@@ -85,6 +86,7 @@ function App() {
                     <MCM101/>
                     <ModalAlert/>
                     <ModalMutation/>
+                    <ModalImage/>
                     <AppRouter isSignIn={rcSignInfo.isLogin}/>
                 </>
             )}

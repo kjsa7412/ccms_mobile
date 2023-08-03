@@ -9,7 +9,8 @@
                a.trou_dd || a.trou_hrti                           trou_dd_hrti,
                a.trou_cont,
                a.equi_cd,
-               b.equi_nm
+               b.equi_nm,
+               a.atfi_id
         from er_trou_mngr a
                  left join ts_equi_mast b on a.equi_cd = b.equi_cd
         where a.comp_cd = #{compCd}

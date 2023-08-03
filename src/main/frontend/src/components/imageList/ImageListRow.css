@@ -1,0 +1,19 @@
+.imageListRow-baseContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    overflow: auto;
+}
+
+.imageListRow-baseContainer .imageListRow-imageBox {
+    width: 100px;
+    height: 100px;
+}
+
+.imageListRow-baseContainer .imageListRow-imageBox:not(:last-child) {
+    margin-right: 5px;
+}
+
+

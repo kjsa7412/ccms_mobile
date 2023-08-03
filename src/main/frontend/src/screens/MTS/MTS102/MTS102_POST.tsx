@@ -14,10 +14,6 @@ const MTS102_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
     const [, setRcMTS102] = useRecoilState<IMTS102>(mts102Atom);
     const [rcSearch,] = useRecoilState<ISearch>(searchAtom);
 
-    const setId = (id: string) => {
-        setRcMTS102((prev) => ({...prev, id: id}));
-    }
-
     const getTotalCount = () => {
         let totalCount = 0;
         let cctvName = rcSearch.cctvName;
@@ -91,7 +87,11 @@ const MTS102_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
                                                   postData={params}
                                                   link={"/MTS102T1"}
                                                   onClick={() => {
-                                                      setId(value.trou_mngr_dd_no)
+                                                      setRcMTS102((prev) => ({
+                                                          ...prev,
+                                                          id: value.trou_mngr_dd_no,
+                                                          atfi_id: value.atfi_id
+                                                      }));
                                                   }}/>
                                         </div>)
                                 })

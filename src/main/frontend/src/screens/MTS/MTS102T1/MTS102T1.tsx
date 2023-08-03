@@ -25,6 +25,8 @@ import Blank from "../../../components/Blank";
 import {IModalAlert, IModalMutation} from "@custom-interfaces/modal-interface";
 import {modalAlertAtom} from "../../../atoms/modalAlertAtom";
 import {modalMutationAtom} from "../../../atoms/modalMutationAtom";
+import {selectAtfi} from "../MTS101T1/MTS101T1_API";
+import ImageListRow from "../../../components/imageList/ImageListRow";
 
 const MTS102T1 = () => {
     // data
@@ -49,6 +51,11 @@ const MTS102T1 = () => {
                 !!data?.data?.Content[0] && loadData(methods, data?.data?.Content[0]);
             }
         }
+    );
+
+    const resultQuery_selectAtfi = useQuery(
+        [EQueryKey.MTS102T1_selectAtfi],
+        () => selectAtfi({atfi_id: rcMTS102.atfi_id})
     );
 
     const resultQuery_selectTSGBForSearch = useQuery(
@@ -190,8 +197,10 @@ const MTS102T1 = () => {
                     <ScreenLabel title={'장애내역'}/>
                     {
                         resultQuery_selectMTS102T1.status !== 'success' ||
-                        resultQuery_selectMTS102T1.isFetching === true ?
-                            <LoadingPost pHeight={225}/> :
+                        resultQuery_selectMTS102T1.isFetching === true ||
+                        resultQuery_selectAtfi.status !== 'success' ||
+                        resultQuery_selectAtfi.isFetching === true ?
+                            <LoadingPost pHeight={325}/> :
                             <>
                                 <RowContents title={"장애관리번호"}
                                              contents={resultQuery_selectMTS102T1.data?.data?.Content?.[0]?.trou_mngr_dd_no}/>
@@ -211,6 +220,7 @@ const MTS102T1 = () => {
                                              contents={resultQuery_selectMTS102T1.data?.data?.Content?.[0]?.coer_dept_nm}/>
                                 <RowContents title={"장애내용"}
                                              contents={resultQuery_selectMTS102T1.data?.data?.Content?.[0]?.trou_cont}/>
+                                <ImageListRow atfi={resultQuery_selectAtfi.data.data.Content}/>
                             </>
                     }
                     <Blank type={EBlank.Row}/>

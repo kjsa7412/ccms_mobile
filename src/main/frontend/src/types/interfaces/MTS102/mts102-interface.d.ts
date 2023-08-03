@@ -1,5 +1,6 @@
 export interface IMTS102 {
-    id: string
+    id: string;
+    atfi_id: string;
 }
 
 export interface IParam_SelectMTS102 {
@@ -15,4 +16,5 @@ export interface IResult_SelectMTS102 {
     trou_cont: string;
     equi_cd: string;
     equi_nm: string;
+    atfi_id: string;
 }

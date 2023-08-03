@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {IAPIResponse} from "@custom-interfaces/common-interface";
+import {IAPIResponse, IParam_SelectAtfi, IResult_SelectAtfi} from "@custom-interfaces/common-interface";
 import {
     IParam_DeleteTROU,
     IParam_SelectMTS102T1,
@@ -13,6 +13,14 @@ export const selectMTS102T1 = (param: IParam_SelectMTS102T1):
     Promise<AxiosResponse<IAPIResponse<IResult_SelectMTS102T1>>> => {
     return axios.post("/api/common/selectList", {
         queryId: "mts102t1.selectMTS102t1",
+        ...param
+    });
+};
+
+export const selectAtfi = (param: IParam_SelectAtfi):
+    Promise<AxiosResponse<IAPIResponse<IResult_SelectAtfi>>> => {
+    return axios.post("/api/common/selectList", {
+        queryId: "common.selectAtfi",
         ...param
     });
 };
