@@ -87,3 +87,12 @@ export const parseDateStringToDate = (dateString: string) => {
     return dateObject;
 }
 
+export const stringToDateFormatYYYYMMDD = (dateString: string) => {
+    const year = Number(dateString.substr(0, 4));
+    const month = Number(dateString.substr(4, 2)) - 1;
+    const day = Number(dateString.substr(6, 2));
+
+    const dateObject = new Date(year, month, day);
+    return dateObject;
+}
+

@@ -211,15 +211,22 @@ const MTS101T1 = () => {
                             required={true}
                             name={'trou_acto_dd'}
                             isHalf={true}
+                            showTimeSelect={true}
                         />
                         <Input
-                            type={EInput.TextareaMini}
-                            title={'처리자'}
-                            required={true}
-                            name={'trou_actr_nm'}
+                            type={EInput.Calendar}
+                            title={'회수날짜'}
+                            required={false}
+                            name={'recall_dt'}
                             isHalf={true}
                         />
                     </InputContainer>
+                    <Input
+                        type={EInput.TextareaMini}
+                        title={'처리자'}
+                        required={true}
+                        name={'trou_actr_nm'}
+                    />
                     <Input
                         type={EInput.Textarea}
                         title={'처리내용'}

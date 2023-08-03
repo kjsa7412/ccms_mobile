@@ -21,6 +21,7 @@ type Props = {
     checkboxData?: Array<string>;
     optionData?: Array<ISearchData>;
     isLoading?: boolean;
+    showTimeSelect?: boolean;
 }
 
 const Input = ({
@@ -34,6 +35,7 @@ const Input = ({
                    checkboxData = [],
                    optionData = [],
                    isLoading = false,
+                   showTimeSelect = false
                }: Props) => {
     const {control} = useFormContext();
 
@@ -105,13 +107,14 @@ const Input = ({
                             className={"input-datePicker"}
                             selected={field.value}
                             locale={ko}
-                            showTimeSelect // 시간 선택 기능 활성화
-                            dateFormat="yyyy-MM-dd HH:mm" // 날짜와 시간 형식 설정
+                            showTimeSelect={showTimeSelect} // 시간 선택 기능 활성화
+                            dateFormat={showTimeSelect ? "yyyy-MM-dd HH:mm" : "yyyy-MM-dd"} // 날짜와 시간 형식 설정
                             timeFormat="HH:mm" // 시간 형식 설정
                             timeIntervals={30} // 시간 간격 설정 (예: 15분 단위)
                             timeCaption="Time" // 시간 선택 레이블
                             closeOnScroll={true}
-                            placeholderText={'점검일자'}
+                            placeholderText={title}
+                            isClearable={true}
                             onFocus={e => e.target.blur()} // <--- Adding this
                             {...field}
                         />

@@ -28,7 +28,8 @@ export const updateTROU = (param: IParam_UpdateTROU):
         trou_acto_dd: getYYYYMMDD(param.trou_acto_dd),
         trou_acto_hrti: getHHMMSS(param.trou_acto_dd),
         trou_actr_nm: param.trou_actr_nm,
-        trou_acto_cont: param.trou_acto_cont
+        trou_acto_cont: param.trou_acto_cont,
+        recall_dt: !!param.recall_dt ? getYYYYMMDD(param.recall_dt) : ""
     });
 };
 

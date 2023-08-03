@@ -151,3 +151,10 @@
     font-size: 10px;
     color: grey;
 }
+
+.react-datepicker__close-icon::after {
+    background-color: var(--main-color) !important;
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+}

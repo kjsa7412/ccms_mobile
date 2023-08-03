@@ -31,7 +31,8 @@
                a.trou_acto_cont,
                a.maint_id,
                a.maint_nm,
-               a.remark
+               a.remark,
+               TO_CHAR(recall_dt, 'YYYYMMDD')                    as recall_dt
         from er_trou_mngr a
                  left join ts_equi_mast b on a.equi_cd = b.equi_cd
         where a.comp_cd = #{compCd}
@@ -42,14 +43,17 @@
         /* mts102t1.updateTROU */
         update er_trou_mngr
         set trou_acto_stts_cd = #{trou_acto_stts_cd}, -- 장애조치상태 (ER020)
-            trou_gb_acto_cd   = #{trou_gb_acto_cd},   -- 장애구분(ER010)
-            trou_acto_meth_cd = #{trou_acto_meth_cd}, -- 처리방법(ER030)
-            trou_acto_dd      = #{trou_acto_dd},      -- 조치일자
-            trou_acto_hrti    = #{trou_acto_hrti},    -- 조치시각
-            trou_actr_nm      = #{trou_actr_nm},      -- 처리자
-            trou_acto_cont    = #{trou_acto_cont}     -- 처리내용
+        trou_gb_acto_cd = #{trou_gb_acto_cd}, -- 장애구분(ER010)
+        trou_acto_meth_cd = #{trou_acto_meth_cd}, -- 처리방법(ER030)
+        trou_acto_dd = #{trou_acto_dd}, -- 조치일자
+        trou_acto_hrti = #{trou_acto_hrti}, -- 조치시각
+        trou_actr_nm = #{trou_actr_nm}, -- 처리자
+        <if test="recall_dt != '' and recall_dt != null">
+            recall_dt = to_date(#{recall_dt}, 'YYYYMMDD'), -- 회수날짜
+        </if>
+        trou_acto_cont = #{trou_acto_cont} -- 처리내용
         where comp_cd = #{compCd}
-          and trou_mngr_dd || '-' || trou_mngr_no = #{id}
+        and trou_mngr_dd || '-' || trou_mngr_no = #{id}
     </update>
 
     <update id="deleteTROU">
@@ -62,6 +66,7 @@
             trou_acto_hrti    = '',      -- 조치시각
             trou_actr_nm      = '',      -- 처리자
             trou_acto_cont    = ''       -- 처리내용
+            recall_dt         = null     -- 회수날짜
         where comp_cd = #{compCd}
           and trou_mngr_dd || '-' || trou_mngr_no = #{id}
     </update>

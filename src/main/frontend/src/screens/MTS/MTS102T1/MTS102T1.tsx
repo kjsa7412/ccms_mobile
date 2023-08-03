@@ -256,16 +256,17 @@ const MTS102T1 = () => {
                             required={true}
                             name={'trou_acto_dd'}
                             isHalf={true}
+                            showTimeSelect={true}
                             isLoading={
                                 resultQuery_selectMTS102T1.status !== 'success' ||
                                 resultQuery_selectMTS102T1.isFetching === true
                             }
                         />
                         <Input
-                            type={EInput.TextareaMini}
-                            title={'처리자'}
-                            required={true}
-                            name={'trou_actr_nm'}
+                            type={EInput.Calendar}
+                            title={'회수날짜'}
+                            required={false}
+                            name={'recall_dt'}
                             isHalf={true}
                             isLoading={
                                 resultQuery_selectMTS102T1.status !== 'success' ||
@@ -273,6 +274,16 @@ const MTS102T1 = () => {
                             }
                         />
                     </InputContainer>
+                    <Input
+                        type={EInput.TextareaMini}
+                        title={'처리자'}
+                        required={true}
+                        name={'trou_actr_nm'}
+                        isLoading={
+                            resultQuery_selectMTS102T1.status !== 'success' ||
+                            resultQuery_selectMTS102T1.isFetching === true
+                        }
+                    />
                     <Input
                         type={EInput.Textarea}
                         title={'처리내용'}

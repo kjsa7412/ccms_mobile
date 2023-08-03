@@ -34,6 +34,7 @@ interface IResult_SelectMTS102T1 {
     maint_id: string;
     maint_nm: string;
     remark: string;
+    recall_dt: string;
 }
 
 interface IParam_UpdateTROU {
@@ -44,6 +45,7 @@ interface IParam_UpdateTROU {
     trou_acto_dd: Date;
     trou_actr_nm: string;
     trou_acto_cont: string;
+    recall_dt: Date | null;
 }
 
 interface IParam_DeleteTROU {

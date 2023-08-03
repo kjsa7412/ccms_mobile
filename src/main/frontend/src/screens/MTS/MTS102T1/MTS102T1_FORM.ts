@@ -1,4 +1,4 @@
-import {parseDateStringToDate} from "../../../utils/HandleDateFormat";
+import {parseDateStringToDate, stringToDateFormatYYYYMMDD} from "../../../utils/HandleDateFormat";
 
 export const initData = {
     trou_acto_stts_cd: 'ESDON',                 // 장애조치상태 (ER020)
@@ -8,6 +8,7 @@ export const initData = {
     trou_acto_hrti: '',                         //조치시각
     trou_actr_nm: '',                           // 처리자
     trou_acto_cont: '',                         // 처리내용
+    recall_dt: null
 }
 
 export const loadData = (methods: any, inputData: any) => {
@@ -34,4 +35,7 @@ export const loadData = (methods: any, inputData: any) => {
 
     !!inputData?.trou_acto_cont &&
     methods.setValue("trou_acto_cont", inputData.trou_acto_cont);
+
+    !!inputData?.recall_dt &&
+    methods.setValue("recall_dt", stringToDateFormatYYYYMMDD(inputData.recall_dt));
 }
