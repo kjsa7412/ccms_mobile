@@ -11,6 +11,7 @@ interface IResult_SelectMTS102T1 {
     trou_gb_cotr_nm: string;
     equi_cd: string;
     equi_nm: string;
+    p_equi_cd: string;
     trou_dd_hrti: string;
     weth_cd: string;
     weth_nm: string;
@@ -50,4 +51,5 @@ interface IParam_UpdateTROU {
 
 interface IParam_DeleteTROU {
     id: string;
+    equi_cd: string;
 }

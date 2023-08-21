@@ -70,7 +70,10 @@ const MTS102T1 = () => {
 
     // mutation
     const resultMutation_updateTROU = useMutation(
-        () => updateTROU({id: rcMTS102.id, ...methods.getValues()}),
+        () => updateTROU({
+            id: rcMTS102.id,
+            ...methods.getValues()
+        }),
         {
             onSuccess: (data, variables, context) => {
                 if (data.data.IsError) {
@@ -98,7 +101,11 @@ const MTS102T1 = () => {
     )
 
     const resultMutation_deleteTROU = useMutation(
-        () => deleteTROU({id: rcMTS102.id}),
+        () => deleteTROU({
+            id: rcMTS102.id,
+            equi_cd: resultQuery_selectMTS102T1.data?.data?.Content?.[0]?.p_equi_cd ?
+                resultQuery_selectMTS102T1.data.data.Content[0].p_equi_cd : ""
+        }),
         {
             onSuccess: (data, variables, context) => {
                 if (data.data.IsError) {

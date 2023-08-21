@@ -63,7 +63,12 @@ const MTS101T1 = () => {
 
     // mutation
     const resultMutation_insertTROU = useMutation(
-        () => insertTROU({id: rcMTS101.id, ...methods.getValues()}),
+        () => insertTROU({
+            id: rcMTS101.id,
+            ...methods.getValues(),
+            equi_cd: resultQuery_selectMTS101T1.data?.data?.Content?.[0]?.p_equi_cd ?
+                resultQuery_selectMTS101T1.data.data.Content[0].p_equi_cd : ""
+        }),
         {
             onSuccess: (data, variables, context) => {
                 if (data.data.IsError) {

@@ -11,6 +11,7 @@ interface IResult_SelectMTS101T1 {
     trou_gb_cotr_nm: string;
     equi_cd: string;
     equi_nm: string;
+    p_equi_cd: string;
     trou_dd_hrti: string;
     weth_cd: string;
     weth_nm: string;
@@ -46,4 +47,5 @@ interface IParam_InsertTROU {
     trou_actr_nm: string;
     trou_acto_cont: string;
     recall_dt: Date | null;
+    equi_cd: string;
 }

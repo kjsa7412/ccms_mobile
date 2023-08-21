@@ -8,7 +8,8 @@
                a.trou_gb_cotr_cd,
                getcmmnm(a.comp_cd, 'ER010', a.trou_gb_cotr_cd)   as trou_gb_cotr_nm,
                a.equi_cd,
-               b.equi_nm,
+               b.area_nm                                         as equi_nm,
+               b.equi_cd                                         as p_equi_cd,
                a.trou_dd || a.trou_hrti                          as trou_dd_hrti,
                a.weth_cd,
                getcmmnm(a.comp_cd, 'TS060', a.weth_cd)           as weth_nm,
@@ -34,7 +35,7 @@
                a.remark,
                TO_CHAR(recall_dt, 'YYYYMMDD')                    as recall_dt
         from er_trou_mngr a
-                 left join ts_equi_mast b on a.equi_cd = b.equi_cd
+                 left join em_area_mast b on a.equi_cd = b.area_id or a.equi_cd = b.old_equi_cd
         where a.comp_cd = #{compCd}
           and a.trou_mngr_dd || '-' || a.trou_mngr_no = #{id}
     </select>
@@ -68,6 +69,18 @@
             trou_acto_cont    = '',      -- 처리내용
             recall_dt         = null     -- 회수날짜
         where comp_cd = #{compCd}
-          and trou_mngr_dd || '-' || trou_mngr_no = #{id}
+          and trou_mngr_dd || '-' || trou_mngr_no = #{id};
+
+        /* mts102t1.deleteTROU (장비상태변경 이력 추가) */
+        INSERT INTO EM_EQUI_STAT_LOGS( COMP_CD, EQUI_CD, BEFORE_STAT, AFTER_STAT
+                                     , CONT, REG_DT)
+        VALUES ( #{compCd}, #{equi_cd}, 'OP', 'ER'
+               , '장애처리취소', now());
+
+        /* mts102t1.deleteTROU (장비상태코드 변경) */
+        UPDATE EM_EQUI_MAST
+        SET EQUI_STAT = 'ER'
+        WHERE COMP_CD = #{compCd}
+          AND EQUI_CD = #{equi_cd};
     </update>
 </mapper>
