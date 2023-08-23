@@ -14,25 +14,21 @@ const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
     const [, setRcMEM101] = useRecoilState<IMEM101>(mem101Atom);
     const [rcSearch,] = useRecoilState<ISearch>(searchAtom);
 
-    // fucntion
-    const setId = (id: string) => {
-        setRcMEM101((prev) => ({...prev, id: id}));
+    // function
+    const setAreaId = (area_id: string) => {
+        setRcMEM101((prev) => ({...prev, area_id: area_id}));
     }
 
     const getTotalCount = () => {
         let totalCount = 0;
-        let equiNm = rcSearch.equiNm;
-        let equiCd = rcSearch.equiCd;
-        let equiAddr = rcSearch.equiAddr;
+        let areaNm = rcSearch.areaNm;
 
         const inputData = selectQuery.data.data.Content;
 
         for (let data of inputData) {
-            let isMatch1 = !!equiCd?.value ? equiCd.value === data.equi_cd : true;
-            let isMatch2 = !!equiNm?.value ? equiNm.value === data.equi_nm : true;
-            let isMatch3 = !!equiAddr?.value ? equiAddr.value === data.inst_addr : true;
+            let isMatch1 = !!areaNm?.value ? areaNm.value === data.area_id : true;
 
-            if (isMatch1 && isMatch2 && isMatch3) {
+            if (isMatch1) {
                 totalCount++;
             }
         }
@@ -55,15 +51,9 @@ const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
                         {
                             selectQuery.data.data.Content
                                 .filter((value: any) => {
-                                    let equiNm = rcSearch.equiNm;
-                                    let equiCd = rcSearch.equiCd;
-                                    let equiAddr = rcSearch.equiAddr;
-
-                                    let isMatch1 = !!equiCd?.value ? equiCd.value === value.equi_cd : true;
-                                    let isMatch2 = !!equiNm?.value ? equiNm.value === value.equi_nm : true;
-                                    let isMatch3 = !!equiAddr?.value ? equiAddr.value === value.inst_addr : true;
-
-                                    return isMatch1 && isMatch2 && isMatch3;
+                                    let areaNm = rcSearch.areaNm;
+                                    let isMatch1 = !!areaNm?.value ? areaNm.value === value.area_id : true;
+                                    return isMatch1;
                                 })
                                 .map((value: any, index: number) => {
                                     if (postMax < index) {
@@ -73,30 +63,30 @@ const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
                                     const params = [
                                         {
                                             title: 'MainTitle',
-                                            contents: value.equi_nm,
+                                            contents: value.area_nm,
                                         },
                                         {
-                                            title: '장비코드',
-                                            contents: value.equi_cd,
+                                            title: '관리번호',
+                                            contents: value.area_id,
                                         },
                                         {
-                                            title: '제조사',
-                                            contents: value.manu_comp,
+                                            title: '장비정보',
+                                            contents: value.manu_info,
                                         },
                                         {
                                             title: '설치주소',
-                                            contents: value.inst_addr,
+                                            contents: value.inst_addr_road,
                                         },
                                     ];
 
                                     return (
-                                        <div key={"div-" + value.equi_cd} style={{width: '100%'}}>
-                                            <Blank key={"blank-" + value.equi_cd} type={EBlank.Row}/>
-                                            <Post key={"post-" + value.equi_cd}
+                                        <div key={"div-" + value.area_id} style={{width: '100%'}}>
+                                            <Blank key={"blank-" + value.area_id} type={EBlank.Row}/>
+                                            <Post key={"post-" + value.area_id}
                                                   postData={params}
                                                   link={"/MEM101T1"}
                                                   onClick={() => {
-                                                      setId(value.equi_cd)
+                                                      setAreaId(value.area_id)
                                                   }}/>
                                         </div>)
                                 })

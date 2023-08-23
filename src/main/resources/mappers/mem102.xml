@@ -4,18 +4,18 @@
     <select id="selectCCTV" resultType="hashmap">
         /*mem102.selectCCTV*/
         select
-        equi_cd,
-        equi_nm,
-        manu_comp,
-        inst_addr,
-        lati,
-        logi
-        from ts_equi_mast
-        where use_yn = 'Y'
+        a.area_id,
+        a.area_nm,
+        b.manu_comp,
+        a.inst_addr_road,
+        a.lati,
+        a.logi
+        from em_area_mast a left join em_equi_mast b on a.comp_cd = b.comp_cd and a.equi_cd = b.equi_cd
+        where a.use_yn = 'Y'
+        and ( a.lati is not null and a.lati != '' and a.logi is not null and a.logi != '')
         <if test="searchWord != null and searchWord != '' and searchWord != '*'.toString() ">
-            and ( equi_cd like '%' || #{searchWord} || '%'
-            or equi_nm like '%' || #{searchWord} || '%' )
+            and ( a.area_id like '%' || #{searchWord} || '%' or a.area_nm like '%' || #{searchWord} || '%' )
         </if>
-        order by comp_cd, equi_cd, equi_nm
+        order by a.comp_cd, a.area_id, a.area_nm
     </select>
 </mapper>

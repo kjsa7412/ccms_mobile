@@ -15,10 +15,8 @@ import useMenuStatus from "../../../hooks/useMenuStatus";
 import {EMenuBar} from "@custom-enums/menu-enum";
 import ScreenLabel from "../../../components/label/ScreenLabel";
 import SearchContainer from "../../../components/containers/SearchContainer";
-import EquiCdList from "../../../components/search/EquiCdList";
 import BaseContainer from "../../../components/containers/BaseContainer";
-import EquiNmList from "../../../components/search/EquiNmList";
-import EquiAddrList from "../../../components/search/EquiAddrList";
+import AreaNmList from "../../../components/search/AreaNmList";
 import MEM101_POST from "./MEM101_POST";
 
 const MEM101 = () => {
@@ -52,13 +50,7 @@ const MEM101 = () => {
             <BaseContainer>
                 <ScreenLabel title={'검색조건'}/>
                 <SearchContainer>
-                    <EquiCdList isLong={true}/>
-                </SearchContainer>
-                <SearchContainer>
-                    <EquiNmList isLong={true}/>
-                </SearchContainer>
-                <SearchContainer>
-                    <EquiAddrList isLong={true}/>
+                    <AreaNmList isLong={true}/>
                 </SearchContainer>
                 <MEM101_POST postMax={postMax} selectQuery={resultQuery_selectMEM101}/>
             </BaseContainer>

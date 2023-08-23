@@ -1,11 +1,13 @@
 export interface IMEM101 {
-    id: string
+    area_id: string;
 }
 
 export interface IResult_SelectMEM101 {
-    equi_cd: string,
-    equi_nm: string,
-    manu_comp: string,
-    inst_addr: string
+    area_nm: string;
+    area_id: string;
+    equi_cd: string;
+    inst_location: string;
+    inst_addr_road: string;
+    manu_info: string;
 }
 

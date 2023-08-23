@@ -14,9 +14,7 @@ const useInitPostMax = (setPostMax: Function, rcSearch: ISearch) => {
         rcSearch.cctvTSGB,
         rcSearch.cctvName,
         rcSearch.cctvCode,
-        rcSearch.equiAddr,
-        rcSearch.equiCd,
-        rcSearch.equiNm
+        rcSearch.areaNm
     ]);
 };
 

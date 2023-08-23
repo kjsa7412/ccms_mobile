@@ -3,12 +3,14 @@
 <mapper namespace="mem101">
     <select id="selectMEM101" resultType="hashmap">
         /* mem101.selectMEM101 */
-        select equi_cd,
-               equi_nm,
-               manu_comp,
-               inst_addr
-        from ts_equi_mast
-        where use_yn = 'Y'
-        order by equi_nm
+        select a.area_nm,
+               a.area_id,
+               a.equi_cd,
+               a.inst_location,
+               a.inst_addr_road,
+               b.manu_comp || ' / ' || b.model_nm as manu_info
+        from em_area_mast a
+                 left join em_equi_mast b on a.comp_cd = b.comp_cd and a.equi_cd = b.equi_cd
+        where a.use_yn = 'Y'
     </select>
 </mapper>

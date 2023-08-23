@@ -16,8 +16,6 @@ export const searchAtom = atom<ISearch>({
         cctvCode: null,
         cctvAddr: null,
         cctvTSGB: null,
-        equiCd: null,
-        equiNm: null,
-        equiAddr: null
+        areaNm: null
     }
 });

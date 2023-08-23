@@ -8,14 +8,14 @@ import LoadingBox from "../loading/LoadingBox";
 import SearchRS from "../searchRS/SearchRS";
 import React from "react";
 
-const EquiNmList = ({isLong = false}: { isLong?: boolean }) => {
+const AreaNmList = ({isLong = false}: { isLong?: boolean }) => {
     const [rcSearch, setRcSearch] = useRecoilState<ISearch>(searchAtom);
 
-    const resultQuery_selectEquiNmForSearch = useQuery(
-        [EQueryKey.SEARCH_EQUINM],
+    const resultQuery_selectAreaNmForSearch = useQuery(
+        [EQueryKey.SEARCH_AREANM],
         () =>
             axios.post('/api/common/selectList', {
-                queryId: 'common.selectEquiNmForSearch'
+                queryId: 'common.selectAreaNmForSearch'
             }),
         {
             onSuccess: (data) => {
@@ -25,15 +25,15 @@ const EquiNmList = ({isLong = false}: { isLong?: boolean }) => {
 
     return (
         <>
-            {resultQuery_selectEquiNmForSearch.status !== 'success' ? (
+            {resultQuery_selectAreaNmForSearch.status !== 'success' ? (
                 <LoadingBox isLong={isLong}/>
             ) : (
                 <SearchRS
                     placeholder={'장비명'}
-                    option={resultQuery_selectEquiNmForSearch.data?.data.Content}
-                    value={rcSearch.equiNm}
-                    defaultValue={rcSearch.equiNm}
-                    handleChange={(data: any) => setRcSearch((prev) => ({...prev, equiNm: data}))}
+                    option={resultQuery_selectAreaNmForSearch.data?.data.Content}
+                    value={rcSearch.areaNm}
+                    defaultValue={rcSearch.areaNm}
+                    handleChange={(data: any) => setRcSearch((prev) => ({...prev, areaNm: data}))}
                     isClearable={true}
                     required={false}
                     isLong={isLong}
@@ -43,4 +43,4 @@ const EquiNmList = ({isLong = false}: { isLong?: boolean }) => {
     )
 }
 
-export default EquiNmList;
+export default AreaNmList;

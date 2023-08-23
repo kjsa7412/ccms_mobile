@@ -24,7 +24,7 @@
     justify-content: flex-end;
     padding-right: 10px;
     width: 70px;
-    min-height: 20px;
+    min-height: 25px;
     border: none;
     font-size: 14px;
     font-weight: bold;
@@ -37,7 +37,7 @@
     align-items: flex-start;
     flex-wrap: wrap;
     flex: 1;
-    min-height: 20px;
+    min-height: 25px;
     border: none;
     font-size: 14px;
     color: black;

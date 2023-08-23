@@ -3,13 +3,38 @@
 <mapper namespace="mem101t1">
     <select id="selectMEM101T1" resultType="hashmap">
         /* mem101t1.selectMEM101T1 */
-        select equi_cd,
-               equi_nm,
-               manu_comp,
-               inst_addr
-        from ts_equi_mast
-        where use_yn = 'Y'
-          and equi_cd = #{id}
-        order by equi_nm
+        select a.area_nm,                                                        -- 장비명
+               a.area_id,                                                        -- 관리번호
+               a.mgmt_town,                                                      -- 행정동
+               a.town_center,                                                    -- 주민센터
+               getcmmnm(a.comp_cd, 'EM020', a.purpose)        as purpose,        -- 설치목적
+               getcmmnm(a.comp_cd, 'EM030', a.purpose_detail) as purpose_detail, -- 설치목적상세
+               a.inst_dt,                                                        -- 설치일자
+               a.mgmt_person,                                                    -- 담당자
+               a.mgmt_person_tel,                                                -- 담당자 연락처
+               a.equi_ip,                                                        -- 장비IP
+               a.rec_time,                                                       -- 촬영시간
+               a.lati,                                                           -- 경도
+               a.logi,                                                           -- 위도
+               a.inst_location,                                                  -- 설치장소
+               a.inst_addr_road,                                                 -- 설치주소(도로명)
+               a.inst_addr_lot,                                                  -- 설치주소(지번)
+               a.lati_logi_addr_road,                                            -- 위경도주소(도로명)
+               a.lati_logi_addr_lot,                                             -- 위경도주소(지번)
+               a.remark,                                                         -- 비고
+               b.equi_nm,                                                        -- 물리장비명
+               b.equi_cd,                                                        -- 장비코드
+               b.manu_comp,                                                      -- 제조사
+               b.model_nm,                                                       -- 모델명
+               b.seri_no,                                                        -- 시리얼번호
+               b.cam_type,                                                       -- 카메라유형
+               b.vurix,                                                          -- vurix
+               b.mon_dist,                                                       -- 감시거리
+               b.view_angle,                                                     -- 감시각
+               b.cam_pixel                                                       -- 카메라화소
+        from em_area_mast a
+                 left join em_equi_mast b on a.comp_cd = b.comp_cd and a.equi_cd = b.equi_cd
+        where a.use_yn = 'Y'
+          and a.area_id = #{area_id}
     </select>
 </mapper>

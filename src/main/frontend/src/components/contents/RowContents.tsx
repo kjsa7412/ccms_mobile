@@ -1,15 +1,15 @@
 import './RowContents.css'
 
 type Props = {
-    title: string;
-    contents: string;
+    title: string | undefined;
+    contents: string | undefined;
 }
 
 const RowContents = ({title, contents}: Props) => {
     return (
         <div className={"rowContents-baseContainer"}>
-            <div className={"rowContents-title"}>{title}</div>
-            <div className={"rowContents-contents"}>{contents}</div>
+            <div className={"rowContents-title"}>{!!title ? title : ""}</div>
+            <div className={"rowContents-contents"}>{!!contents ? contents : ""}</div>
         </div>
     )
 }

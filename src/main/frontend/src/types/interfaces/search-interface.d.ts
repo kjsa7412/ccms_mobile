@@ -5,9 +5,7 @@ export interface ISearch {
     cctvCode: ISearchData | null;
     cctvAddr: ISearchData | null;
     cctvTSGB: ISearchData | null;
-    equiCd: ISearchData | null;
-    equiNm: ISearchData | null;
-    equiAddr: ISearchData | null;
+    areaNm: ISearchData | null;
 }
 
 export interface ISearchData {
