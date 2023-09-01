@@ -27,26 +27,28 @@ const ModalMutation = () => {
                                 <div className={"modalMutation-textContainer"}>
                                     <p>{rcModalMutation.message + "하시겠습니까?"}</p>
                                 </div>
-                                <div className={"modalMutation-button"}
-                                     onClick={() => {
-                                         setRcModalMutation((prev) => ({
-                                             ...prev,
-                                             modalMutationStatus: EModalMutationStatus.Progress
-                                         }));
-                                         rcModalMutation.resultMutation.mutate();
-                                     }}
-                                >
-                                    확인
-                                </div>
-                                <div className={"modalMutation-button"}
-                                     onClick={() => {
-                                         setRcModalMutation((prev) => ({
-                                             ...prev,
-                                             modalMutationStatus: EModalMutationStatus.Close
-                                         }));
-                                     }}
-                                >
-                                    취소
+                                <div className={"modalMutation-buttonContainer"}>
+                                    <div className={"modalMutation-button line"}
+                                         onClick={() => {
+                                             setRcModalMutation((prev) => ({
+                                                 ...prev,
+                                                 modalMutationStatus: EModalMutationStatus.Progress
+                                             }));
+                                             rcModalMutation.resultMutation.mutate();
+                                         }}
+                                    >
+                                        확인
+                                    </div>
+                                    <div className={"modalMutation-button"}
+                                         onClick={() => {
+                                             setRcModalMutation((prev) => ({
+                                                 ...prev,
+                                                 modalMutationStatus: EModalMutationStatus.Close
+                                             }));
+                                         }}
+                                    >
+                                        취소
+                                    </div>
                                 </div>
                             </>
                         )}

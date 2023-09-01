@@ -18,7 +18,7 @@
     align-items: center;
     background: white;
     overflow: auto;
-    border-radius: 10px;
+    border-radius: 3px;
     outline: none;
     border-style: none;
     border-color: darkgray;
@@ -37,8 +37,21 @@
 
 .modalMutation-textContainer > p {
     font-weight: bold;
-    font-size: 13px;
+    font-size: 16px;
     padding: 10px;
+}
+
+.modalMutation-buttonContainer {
+    display: flex;
+    flex-direction: row;
+    height: 25%;
+    width: 100%;
+    border-style: solid;
+    border-color: lightgray;
+    border-width: 1px;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
 }
 
 .modalMutation-button {
@@ -46,15 +59,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 25%;
-    width: 100%;
-    background: white;
+    height: 100%;
+    width: 50%;
+    background: ghostwhite;
+    font-size: 14px;
+}
+
+.modalMutation-button.line {
     border-style: solid;
     border-color: lightgray;
     border-width: 1px;
     border-bottom: none;
+    border-top: none;
     border-left: none;
-    border-right: none;
-    font-size: 13px;
-    color: red;
 }

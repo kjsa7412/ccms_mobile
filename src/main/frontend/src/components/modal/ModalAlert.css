@@ -18,7 +18,7 @@
     align-items: center;
     background: white;
     overflow: auto;
-    border-radius: 10px;
+    border-radius: 3px;
     outline: none;
     border-style: none;
     border-color: darkgray;
@@ -37,7 +37,7 @@
 
 .modalAlert-textContainer > p {
     font-weight: bold;
-    font-size: 13px;
+    font-size: 16px;
     padding: 10px;
 }
 
@@ -48,13 +48,12 @@
     align-items: center;
     height: 25%;
     width: 100%;
-    background: white;
+    background: ghostwhite;
     border-style: solid;
     border-color: lightgray;
     border-width: 1px;
     border-bottom: none;
     border-left: none;
     border-right: none;
-    font-size: 13px;
-    color: red;
+    font-size: 14px;
 }
