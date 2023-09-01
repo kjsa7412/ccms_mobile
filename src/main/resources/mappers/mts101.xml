@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mts101">
     <select id="selectMTS101" resultType="hashmap">
-        /* common.selectMTS101 */
+        /* mts101.selectMTS101 */
         select a.trou_mngr_dd || '-' || a.trou_mngr_no         as trou_mngr_dd_no,
                a.trou_gb_cotr_cd,
                getcmmnm(a.comp_cd, 'ER010', a.trou_gb_cotr_cd) as trou_gb_cotr_nm,

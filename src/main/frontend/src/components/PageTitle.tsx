@@ -15,7 +15,7 @@ function PageTitle({title = '', themeColor = '#fefefe'}: Props) {
 
     return (
         <Helmet>
-            <title>{title} | NaraOSS</title>
+            <title>{title} | CCMS Mobile</title>
             <meta name="description" content="Web site created using create-react-app"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
             <meta name="apple-mobile-web-app-capable" content="yes"/>
