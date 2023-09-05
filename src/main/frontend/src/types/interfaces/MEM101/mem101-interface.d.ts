@@ -1,5 +1,5 @@
 export interface IMEM101 {
-    area_id: string;
+    vms_no: string;
 }
 
 export interface IResult_SelectMEM101 {

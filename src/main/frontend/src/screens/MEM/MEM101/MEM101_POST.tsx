@@ -15,8 +15,8 @@ const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
     const [rcSearch,] = useRecoilState<ISearch>(searchAtom);
 
     // function
-    const setAreaId = (area_id: string) => {
-        setRcMEM101((prev) => ({...prev, area_id: area_id}));
+    const setAreaId = (vms_no: string) => {
+        setRcMEM101((prev) => ({...prev, vms_no: vms_no}));
     }
 
     const getTotalCount = () => {
@@ -26,7 +26,7 @@ const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
         const inputData = selectQuery.data.data.Content;
 
         for (let data of inputData) {
-            let isMatch1 = !!areaNm?.value ? areaNm.value === data.area_id : true;
+            let isMatch1 = !!areaNm?.value ? areaNm.value === data.vms_no : true;
 
             if (isMatch1) {
                 totalCount++;
@@ -52,7 +52,7 @@ const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
                             selectQuery.data.data.Content
                                 .filter((value: any) => {
                                     let areaNm = rcSearch.areaNm;
-                                    let isMatch1 = !!areaNm?.value ? areaNm.value === value.area_id : true;
+                                    let isMatch1 = !!areaNm?.value ? areaNm.value === value.vms_no : true;
                                     return isMatch1;
                                 })
                                 .map((value: any, index: number) => {
@@ -86,7 +86,7 @@ const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
                                                   postData={params}
                                                   link={"/MEM101T1"}
                                                   onClick={() => {
-                                                      setAreaId(value.area_id)
+                                                      setAreaId(value.vms_no)
                                                   }}/>
                                         </div>)
                                 })

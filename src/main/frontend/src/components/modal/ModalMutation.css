@@ -65,6 +65,10 @@
     font-size: 14px;
 }
 
+.modalMutation-button.long {
+    width: 100%;
+}
+
 .modalMutation-button.line {
     border-style: solid;
     border-color: lightgray;

@@ -58,8 +58,10 @@ const ModalMutation = () => {
                                 <div className={"modalMutation-textContainer"}>
                                     <p>{rcModalMutation.message + "중입니다."}</p>
                                 </div>
-                                <div className={"modalMutation-button"}>
-                                    <img alt={'spinner'} src={`${process.env.PUBLIC_URL}/img/Spinner-1s-38px.gif`}/>
+                                <div className={"modalMutation-buttonContainer"}>
+                                    <div className={"modalMutation-button long"}>
+                                        <img alt={'spinner'} src={`${process.env.PUBLIC_URL}/img/Spinner-1s-38px.gif`}/>
+                                    </div>
                                 </div>
                             </>
                         )}
@@ -69,17 +71,19 @@ const ModalMutation = () => {
                                 <div className={"modalMutation-textContainer"}>
                                     <p>{rcModalMutation.message + "되었습니다."}</p>
                                 </div>
-                                <div className={"modalMutation-button"}
-                                     onClick={() => {
-                                         setRcModalMutation((prev) => ({
-                                             ...prev,
-                                             modalMutationStatus: EModalMutationStatus.Close
-                                         }));
-                                         rcModalMutation.resultMutation.reset();
-                                         successFunction();
-                                     }}
-                                >
-                                    확인
+                                <div className={"modalMutation-buttonContainer"}>
+                                    <div className={"modalMutation-button long"}
+                                         onClick={() => {
+                                             setRcModalMutation((prev) => ({
+                                                 ...prev,
+                                                 modalMutationStatus: EModalMutationStatus.Close
+                                             }));
+                                             rcModalMutation.resultMutation.reset();
+                                             successFunction();
+                                         }}
+                                    >
+                                        확인
+                                    </div>
                                 </div>
                             </>
                         )}
@@ -89,17 +93,19 @@ const ModalMutation = () => {
                                 <div className={"modalMutation-textContainer"}>
                                     <p>실패했습니다.</p>
                                 </div>
-                                <div className={"modalMutation-button"}
-                                     color={'red'}
-                                     onClick={() => {
-                                         setRcModalMutation((prev) => ({
-                                             ...prev,
-                                             modalMutationStatus: EModalMutationStatus.Close
-                                         }));
-                                         rcModalMutation.resultMutation.reset();
-                                     }}
-                                >
-                                    확인
+                                <div className={"modalMutation-buttonContainer"}>
+                                    <div className={"modalMutation-button long"}
+                                         color={'red'}
+                                         onClick={() => {
+                                             setRcModalMutation((prev) => ({
+                                                 ...prev,
+                                                 modalMutationStatus: EModalMutationStatus.Close
+                                             }));
+                                             rcModalMutation.resultMutation.reset();
+                                         }}
+                                    >
+                                        확인
+                                    </div>
                                 </div>
                             </>
                         )}

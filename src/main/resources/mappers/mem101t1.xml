@@ -35,6 +35,6 @@
         from em_area_mast a
                  left join em_equi_mast b on a.comp_cd = b.comp_cd and a.equi_cd = b.equi_cd
         where a.use_yn = 'Y'
-          and a.area_id = #{area_id}
+          and a.vms_no = #{vms_no}
     </select>
 </mapper>

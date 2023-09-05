@@ -5,7 +5,7 @@ import localStorageEffect from "../localStorageEffect";
 export const mem101Atom = atom<IMEM101>({
     key: 'mem101',
     default: {
-        area_id: ""
+        vms_no: ""
     },
     effects: [localStorageEffect('mem101')],
 });

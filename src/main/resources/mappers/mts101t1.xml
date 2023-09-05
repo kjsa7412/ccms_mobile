@@ -35,7 +35,7 @@
                a.remark,
                TO_CHAR(recall_dt, 'YYYYMMDD')                    as recall_dt
         from er_trou_mngr a
-                 left join em_area_mast b on a.equi_cd = b.area_id or a.equi_cd = b.old_equi_cd
+                 left join em_area_mast b on a.equi_cd = b.vms_no or a.equi_cd = b.old_equi_cd
         where a.comp_cd = #{compCd}
           and a.trou_mngr_dd || '-' || a.trou_mngr_no = #{id}
     </select>

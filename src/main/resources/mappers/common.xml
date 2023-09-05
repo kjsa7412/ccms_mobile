@@ -47,7 +47,7 @@
 
     <select id="selectAreaNmForSearch" resultType="hashmap">
         /* common.selectAreaNmForSearch */
-        select area_id "value",
+        select vms_no  "value",
                area_nm "label"
         from em_area_mast
         where use_yn = 'Y'

@@ -37,7 +37,7 @@ const MTS102 = () => {
     // query
     const resultQuery_selectMTS102 = useQuery(
         [EQueryKey.MTS102_selectMTS102],
-        () => selectMTS102({yyyy: rcSearch.yyyy.value, mm: rcSearch.mm.value}),
+        () => selectMTS102({yyyy: rcSearch.yyyy?.value, mm: rcSearch.mm?.value}),
         {enabled: false},
     );
 

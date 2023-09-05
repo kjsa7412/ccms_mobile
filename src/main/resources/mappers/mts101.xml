@@ -3,21 +3,23 @@
 <mapper namespace="mts101">
     <select id="selectMTS101" resultType="hashmap">
         /* mts101.selectMTS101 */
-        select a.trou_mngr_dd || '-' || a.trou_mngr_no         as trou_mngr_dd_no,
-               a.trou_gb_cotr_cd,
-               getcmmnm(a.comp_cd, 'ER010', a.trou_gb_cotr_cd) as trou_gb_cotr_nm,
-               a.trou_dd || a.trou_hrti                           trou_dd_hrti,
-               a.trou_cont,
-               a.equi_cd,
-               b.area_nm                                       as equi_nm,
-               a.atfi_id
+        select a.trou_mngr_dd || '-' || a.trou_mngr_no as trou_mngr_dd_no,
+        a.trou_gb_cotr_cd,
+        getcmmnm(a.comp_cd, 'ER010', a.trou_gb_cotr_cd) as trou_gb_cotr_nm,
+        a.trou_dd || a.trou_hrti trou_dd_hrti,
+        a.trou_cont,
+        a.equi_cd,
+        b.area_nm as equi_nm,
+        a.atfi_id
         from er_trou_mngr a
-                 left join em_area_mast b on a.equi_cd = b.area_id or a.equi_cd = b.old_equi_cd
+        left join em_area_mast b on a.equi_cd = b.vms_no or a.equi_cd = b.old_equi_cd
         where a.comp_cd = #{compCd}
-          and substring(a.trou_dd, 1, 4) = #{yyyy}
-          and substring(a.trou_dd, 5, 2) = #{mm}
-          and a.trou_acto_stts_cd != 'ESDON'
-          and a.maint_id = #{loginId}
+        and substring(a.trou_dd, 1, 4) = #{yyyy}
+        <if test="mm != null and mm != ''">
+            and substring(a.trou_dd, 5, 2) = #{mm}
+        </if>
+        and a.trou_acto_stts_cd != 'ESDON'
+        and a.maint_id = #{loginId}
         order by a.trou_dd desc, a.trou_hrti desc
     </select>
 </mapper>

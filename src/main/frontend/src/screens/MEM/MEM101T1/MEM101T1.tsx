@@ -24,7 +24,7 @@ const MEM101T1 = () => {
     // query
     const resultQuery_selectMEM101T1 = useQuery(
         [EQueryKey.MEM101_selectMEM101T1],
-        () => selectMEM101T1({area_id: rcMEM101.area_id})
+        () => selectMEM101T1({vms_no: rcMEM101.vms_no})
     );
 
     return (

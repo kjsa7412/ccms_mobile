@@ -8,9 +8,11 @@
                a.equi_cd,
                a.inst_location,
                a.inst_addr_road,
-               b.manu_comp || ' / ' || b.model_nm as manu_info
+               b.manu_comp || ' / ' || b.model_nm as manu_info,
+               a.vms_no
         from em_area_mast a
                  left join em_equi_mast b on a.comp_cd = b.comp_cd and a.equi_cd = b.equi_cd
         where a.use_yn = 'Y'
+        order by area_nm
     </select>
 </mapper>

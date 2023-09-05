@@ -30,14 +30,13 @@ const MTS101 = () => {
     const queryClient = useQueryClient();
     const [postMax, setPostMax] = useState(20);
     const [rcSearch, setRcSearch] = useRecoilState<ISearch>(searchAtom);
-    const [, setRcMTS101] = useRecoilState<IMTS101>(mts101Atom);
     const resetRcMTS101 = useResetRecoilState(mts101Atom);
     const resetRcSearch = useResetRecoilState(searchAtom);
 
     // query
     const resultQuery_selectMTS101 = useQuery(
         [EQueryKey.MTS101_selectMTS101],
-        () => selectMTS101({yyyy: rcSearch.yyyy.value, mm: rcSearch.mm.value}),
+        () => selectMTS101({yyyy: rcSearch.yyyy?.value, mm: rcSearch.mm?.value}),
         {enabled: false},
     );
 

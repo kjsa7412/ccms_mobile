@@ -46,9 +46,9 @@ const MEM102 = () => {
                     const content = document.createElement('div');
                     content.innerHTML = `
                         <div class="mem102-infoContainer">
-                            <div class="mem102-itemContainer"><div class="mem102-title">장비명</div><div class="mem102-contents">${feature.get('area_nm')}</div></div>
+                            <div class="mem102-itemContainer"><div class="mem102-title">장비이름</div><div class="mem102-contents">${feature.get('area_nm')}</div></div>
                             <div class="mem102-itemContainer"><div class="mem102-title">관리번호</div><div class="mem102-contents">${feature.get('area_id')}</div></div>
-                            <div class="mem102-itemContainer"><div class="mem102-title">제조사</div><div class="mem102-contents">${feature.get('manu_comp')}</div></div>
+                            <div class="mem102-itemContainer"><div class="mem102-title">제조회사</div><div class="mem102-contents">${feature.get('manu_comp')}</div></div>
                             <div class="mem102-itemContainer"><div class="mem102-title">설치주소</div><div class="mem102-contents">${feature.get('inst_addr_road')}</div></div>
                         </div>
                     `;
@@ -68,7 +68,7 @@ const MEM102 = () => {
             ...value
         });
         marker.setStyle(new Style({
-            text: new Text({text: value.area_nm, font: '13px Noto Sans KR', offsetY: 15, padding: [5, 5, 5, 5]}),
+            text: new Text({text: value.area_nm, font: '13px bold SUITE', offsetY: 15, padding: [5, 5, 5, 5]}),
             image: new Icon({anchor: [0.5, 1], src: "img/cctv-40px.png", scale: 0.2})
         }));
         return marker;

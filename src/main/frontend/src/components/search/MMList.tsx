@@ -33,8 +33,8 @@ const MMList = ({isLong = false}: { isLong?: boolean }) => {
                     value={rcSearch.mm}
                     defaultValue={rcSearch.mm}
                     handleChange={(data: any) => setRcSearch((prev) => ({...prev, mm: data}))}
-                    isClearable={false}
-                    required={true}
+                    isClearable={true}
+                    required={false}
                     isLong={isLong}
                 />
             )}

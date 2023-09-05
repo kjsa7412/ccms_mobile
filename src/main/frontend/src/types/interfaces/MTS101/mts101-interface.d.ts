@@ -5,7 +5,7 @@ export interface IMTS101 {
 
 export interface IParam_SelectMTS101 {
     yyyy: string;
-    mm: string;
+    mm: string | null;
 }
 
 export interface IResult_SelectMTS101 {

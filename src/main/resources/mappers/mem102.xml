@@ -16,6 +16,6 @@
         <if test="searchWord != null and searchWord != '' and searchWord != '*'.toString() ">
             and ( a.area_id like '%' || #{searchWord} || '%' or a.area_nm like '%' || #{searchWord} || '%' )
         </if>
-        order by a.comp_cd, a.area_id, a.area_nm
+        order by a.comp_cd, a.area_nm
     </select>
 </mapper>

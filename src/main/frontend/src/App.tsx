@@ -35,7 +35,7 @@ function App() {
         () => silentSignIn(''),
         {
             enabled: rcSignInfo.isSilentSignIn,
-            refetchInterval: EJWT.ExpiryTimeForTest,
+            refetchInterval: EJWT.ExpiryTime,
             onSuccess: (data) => {
                 const rHeaders = data?.headers;
                 registerAccessTokenOfHeader(rHeaders["x-auth-token"]);
