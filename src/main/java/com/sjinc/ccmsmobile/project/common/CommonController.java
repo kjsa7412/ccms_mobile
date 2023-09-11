@@ -175,7 +175,7 @@ public class CommonController {
 
         try {
             Resource resource = FrameFileUtil.loadAsResource(
-                    FrameConstants.REAL_PATH + // todo : 백오피스 IP를 path로 잡아야함
+                    FrameConstants.REAL_PATH +
                             httpServletRequest.getParameter("servPath"),
                     httpServletRequest.getParameter("servFileNm"));
 

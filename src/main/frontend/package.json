@@ -58,5 +58,6 @@
   "devDependencies": {
     "react-app-rewired": "^2.2.1",
     "tsconfig-paths-webpack-plugin": "^4.0.1"
-  }
+  },
+  "homepage": "http://220.200.200.24"
 }
