@@ -35,6 +35,11 @@ public class CommonController {
         this.servletContext = servletContext;
     }
 
+    @RequestMapping(value = "/test", method = {RequestMethod.GET})
+    public ResponseEntity test() {
+        return ResponseEntity.ok().body("ok");
+    }
+
     /**
      * 공통 목록 조회 API
      *

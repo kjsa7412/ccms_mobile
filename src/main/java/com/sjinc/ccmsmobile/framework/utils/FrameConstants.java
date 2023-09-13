@@ -34,7 +34,7 @@ public class FrameConstants {
     public static final String FORM_EDIT_MODE_NEW = "new";
     public static final String FORM_EDIT_MODE_RESET = "rest";
 
-    public static String REAL_PATH = "";
+    public static String REAL_PATH = "/data/ccms-mobile/";
 
     public static void setRealPath(String realPath) {
         REAL_PATH = StringUtils.hasText(realPath) ? realPath : "";

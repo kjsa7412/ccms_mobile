@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 세션 생성 정책 설정 (세션을 사용하지 않음)
                 .and()
                 .authorizeRequests() // 요청에 대한 인가 설정 시작
-                .antMatchers("/api/auth/signIn", "/api/auth/silentSignIn", "/api/auth/signOut",
+                .antMatchers("/api/test", "/api/auth/signIn", "/api/auth/silentSignIn", "/api/auth/signOut",
                         "/img/**", "/static/**", "/manifest.json", "/index.html", "/favicon.ico", "/asset-manifest.json").permitAll() // 특정 경로는 모두 허용
                 .antMatchers(HttpMethod.GET, "/**").permitAll() // GET 요청은 모두 허용
                 .antMatchers("**exception**").permitAll() // 특정 패턴의 경로는 모두 허용
