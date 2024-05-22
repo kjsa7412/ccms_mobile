@@ -28,3 +28,20 @@ export interface IResult_SelectAtfi {
     file_size: string;
     dele_yn: string;
 }
+
+export interface IParam_SelectTROUAtfi {
+    trou_id: string;
+}
+
+export interface IResult_SelectTROUAtfi {
+    comp_cd: string;
+    trou_id: string;
+    atfi_seq: string;
+    serv_path: string;
+    serv_file_nm: string;
+    orig_file_nm: string;
+    file_exte: string;
+    file_size: string;
+    dele_yn: string;
+    reg_dt: string;
+}

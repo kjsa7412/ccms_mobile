@@ -7,6 +7,10 @@
     height: 100%;
 }
 
+.screen-container-parent.flexEnd {
+    justify-content: flex-end;
+}
+
 .screen-container-parent.color {
     background: linear-gradient(#E9559C, #E9559C, #E9559C);
     justify-content: center;

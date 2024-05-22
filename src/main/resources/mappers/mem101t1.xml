@@ -10,8 +10,10 @@
                getcmmnm(a.comp_cd, 'EM020', a.purpose)        as purpose,        -- 설치목적
                getcmmnm(a.comp_cd, 'EM030', a.purpose_detail) as purpose_detail, -- 설치목적상세
                a.inst_dt,                                                        -- 설치일자
-               a.mgmt_person,                                                    -- 담당자
-               a.mgmt_person_tel,                                                -- 담당자 연락처
+               a.mgmt_dept,
+               a.mgmt_comp,
+               c.mgmt_person,                                                    -- 담당자
+               c.mgmt_person_tel,                                                -- 담당자 연락처
                a.equi_ip,                                                        -- 장비IP
                a.rec_time,                                                       -- 촬영시간
                a.lati,                                                           -- 경도
@@ -33,7 +35,8 @@
                b.view_angle,                                                     -- 감시각
                b.cam_pixel                                                       -- 카메라화소
         from em_area_mast a
-                 left join em_equi_mast b on a.comp_cd = b.comp_cd and a.equi_cd = b.equi_cd
+        left join em_equi_mast b on a.comp_cd = b.comp_cd and a.equi_cd = b.equi_cd
+        left join rm_mgmt_comp c on a.comp_cd = c.comp_cd and a.mgmt_comp = c.mgmt_comp and c.use_yn = 'Y'
         where a.use_yn = 'Y'
           and a.vms_no = #{vms_no}
     </select>

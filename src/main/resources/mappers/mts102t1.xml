@@ -82,5 +82,79 @@
         SET EQUI_STAT = 'ER'
         WHERE COMP_CD = #{compCd}
           AND EQUI_CD = #{equi_cd};
+
+        /* mts102t1.deleteTROU (첨부파일 삭제) */
+        update er_atfi_info
+        set dele_yn = 'Y',
+            update_dt = now(),
+            update_user_id = #{loginId}
+        where comp_cd = #{compCd}
+          and trou_id = #{id};
+    </update>
+
+    <select id="selectTORUAtfi" resultType="hashmap">
+        /* mts102t1.selectTORUAtfi */
+        select comp_cd,
+               trou_id,
+               atfi_seq,
+               serv_path,
+               serv_file_nm,
+               orig_file_nm,
+               file_exte,
+               file_size,
+               dele_yn,
+               reg_dt
+        from er_atfi_info
+        where comp_cd = #{compCd}
+          and trou_id = #{trou_id}
+          and dele_yn = 'N'
+    </select>
+
+    <insert id="insertFile">
+        /* mts101t1.insertFile */
+        <selectKey keyProperty="atfiSeq" resultType="Int" order="BEFORE">
+            select coalesce(max(atfi_seq) + 1, 1) atfiSeq
+            from er_atfi_info
+            where trou_id = #{trouId}
+        </selectKey>
+        insert into er_atfi_info
+        (
+        comp_cd,
+        trou_id,
+        atfi_seq,
+        serv_path,
+        serv_file_nm,
+        orig_file_nm,
+        file_exte,
+        file_size,
+        dele_yn,
+        reg_user_id,
+        reg_dt
+        )
+        values
+        (
+        #{compCd},
+        #{trouId},
+        #{atfiSeq},
+        #{servPath},
+        #{servFileNm},
+        #{origFileNm},
+        #{fileExte},
+        #{fileSize},
+        'N',
+        #{regUserId},
+        now()
+        );
+    </insert>
+
+    <update id="deleteFile">
+        /* mts102t1.deleteFile */
+        update er_atfi_info
+        set dele_yn = 'Y',
+            update_dt = now(),
+            update_user_id = #{updateUserId}
+        where comp_cd = #{compCd}
+        and trou_id = #{trouId}
+        and atfi_seq = #{atfiSeq}
     </update>
 </mapper>

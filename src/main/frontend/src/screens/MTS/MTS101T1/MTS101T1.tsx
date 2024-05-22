@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ScreenContainer from "../../../components/containers/ScreenContainer";
 import PageTitle from "../../../components/PageTitle";
 import HeaderBase from "../../../components/header/HeaderBase";
 import {HeaderClose, HeaderTitle} from "../../../components/header/HeaderItems";
-import {useRecoilState} from "recoil";
+import {useRecoilState, useResetRecoilState} from "recoil";
 import {IMenu} from "@custom-interfaces/menu-interface";
 import {menuAtom} from "../../../atoms/menuAtom";
 import {IMTS101} from "@custom-interfaces/MTS101/mts101-interface";
@@ -15,7 +15,7 @@ import {useMutation, useQuery} from 'react-query';
 import ScreenLabel from "../../../components/label/ScreenLabel";
 import LoadingPost from "../../../components/loading/LoadingPost";
 import RowContents from "../../../components/contents/RowContents";
-import {formattedDate} from "../../../utils/HandleDateFormat";
+import {formattedDate, getHHMMSS, getYYYYMMDD} from "../../../utils/HandleDateFormat";
 import Input from "../../../components/input/Input";
 import {EBlank, EInput, EModalMutationStatus} from "@custom-enums/common-enum";
 import InputContainer from "../../../components/containers/InputContainer";
@@ -26,6 +26,11 @@ import {modalAlertAtom} from "../../../atoms/modalAlertAtom";
 import {IModalAlert, IModalMutation} from "@custom-interfaces/modal-interface";
 import {modalMutationAtom} from "../../../atoms/modalMutationAtom";
 import ImageListRow from "../../../components/imageList/ImageListRow";
+import AttachFile from "../../../components/attachFile/AttachFile";
+import {attachFileAtom} from "../../../atoms/attachFileAtom";
+import {IAttachFile} from "@custom-interfaces/attachFile-interface";
+import useAttachFileAtomAction from "../../../action/useAttachFileAtomAction";
+import {EAttachFileAtomAction} from "@custom-enums/action-enum";
 
 const MTS101T1 = () => {
     // data
@@ -33,6 +38,10 @@ const MTS101T1 = () => {
     const [rcMTS101,] = useRecoilState<IMTS101>(mts101Atom);
     const [, setRcModalAlert] = useRecoilState<IModalAlert>(modalAlertAtom);
     const [, setRcModalMutation] = useRecoilState<IModalMutation>(modalMutationAtom);
+
+    const [rcAttachFile] = useRecoilState<IAttachFile>(attachFileAtom);
+    const initUnUseSave = useAttachFileAtomAction(EAttachFileAtomAction.InitUnUseSave);
+
 
     // form
     const methods = useForm({
@@ -63,12 +72,29 @@ const MTS101T1 = () => {
 
     // mutation
     const resultMutation_insertTROU = useMutation(
-        () => insertTROU({
-            id: rcMTS101.id,
-            ...methods.getValues(),
-            equi_cd: resultQuery_selectMTS101T1.data?.data?.Content?.[0]?.p_equi_cd ?
-                resultQuery_selectMTS101T1.data.data.Content[0].p_equi_cd : ""
-        }),
+        () => {
+            const fd = new FormData();
+            fd.append("id", rcMTS101.id);
+            fd.append("trou_acto_stts_cd", methods.getValues("trou_acto_stts_cd"));
+            // @ts-ignore
+            fd.append("trou_gb_acto_cd", methods.getValues("trou_gb_acto_cd").value);
+            // @ts-ignore
+            fd.append("trou_acto_meth_cd", methods.getValues("trou_acto_meth_cd").value);
+            fd.append("trou_acto_dd", getYYYYMMDD(methods.getValues("trou_acto_dd")));
+            fd.append("trou_acto_hrti", getHHMMSS(methods.getValues("trou_acto_dd")));
+            fd.append("trou_actr_nm", methods.getValues("trou_actr_nm"));
+            fd.append("trou_acto_cont", methods.getValues("trou_acto_cont"));
+            fd.append("recall_dt", !!methods.getValues("recall_dt") ? getYYYYMMDD(methods.getValues("recall_dt")) : "");
+            fd.append("equi_cd",
+                resultQuery_selectMTS101T1.data?.data?.Content?.[0]?.p_equi_cd ?
+                resultQuery_selectMTS101T1.data.data.Content[0].p_equi_cd : "");
+
+            rcAttachFile.attachFile.forEach(function(item) {
+                fd.append("file", item.imgFile);
+            })
+
+            return insertTROU(fd);
+        },
         {
             onSuccess: (data, variables, context) => {
                 if (data.data.IsError) {
@@ -140,6 +166,12 @@ const MTS101T1 = () => {
             }));
         }
     };
+
+    useEffect(() => {
+        initUnUseSave();
+        return () => {
+        };
+    }, []);
 
     return (
         <ScreenContainer>
@@ -247,6 +279,9 @@ const MTS101T1 = () => {
                         required={true}
                         name={'trou_acto_cont'}
                     />
+                    <Blank type={EBlank.Row}/>
+                    <ScreenLabel title={'첨부파일'}/>
+                    <AttachFile/>
                     <UpsertSubmitButton
                         value={'등록'}
                         isLoading={resultMutation_insertTROU.isLoading}

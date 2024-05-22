@@ -2,13 +2,14 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 80%;
     border-radius: 3px;
     background: white;
     padding: 15px;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.01);
-    top: 35px;
-    left: -150px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
 }
 
 .mem102-itemContainer {
@@ -20,7 +21,7 @@
 .mem102-title {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-end;
     padding-right: 10px;
     width: 70px;
@@ -34,10 +35,10 @@
 .mem102-contents {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     flex: 1;
-    min-height: 25px;
+    min-height: 35px;
     border: none;
     font-size: 14px;
     color: black;
@@ -63,4 +64,87 @@
     flex-direction: row;
     width: 100%;
     margin-bottom: 10px;
+}
+
+.mem102-popupContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: center;
+    position: fixed;
+    z-index: 900;
+    width: 100%;
+}
+
+.mem102-iconContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+}
+
+.mem102-iconContainer > .icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+}
+
+.mem102-contentsContainer{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    max-height: 200px;
+    background: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.mem102-contentsContainer > .contents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 50px;
+    border-top: 0.5px solid #ccc;
+    font-size: 14px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.mem102-popupDetailContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+    align-items: center;
+    position: fixed;
+    z-index: 910;
+    width: 300px;
+    height: 200px;
+}
+
+.popup-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.mem102-bottomContainer{
+    display: flex;
+    width: 100%;
+    height: 30px;
+    background: darkgrey;
 }

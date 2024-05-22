@@ -18,6 +18,7 @@ export const EQueryKey = {
     MTS102_selectMTS102: 'MTS102_selectMTS102',
     MTS102T1_selectMTS102T1: 'MTS102T1_selectMTS102T1',
     MTS102T1_selectAtfi: 'MTS101T2_selectAtfi',
+    MTS102T1_selectTROUAtfi: 'MTS101T2_selectTROUAtfi',
     // MEM101
     MEM101_selectMEM101: 'MEM101_selectMEM101',
     MEM101_selectMEM101T1: 'MEM101_selectMEM101T1',

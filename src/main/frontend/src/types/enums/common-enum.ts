@@ -5,12 +5,15 @@ export const enum EJWT {
 
 export const enum EIcon {
     Close = "Close",
+    Close2 = "Close2",
     SignOut = "SignOut",
     ArrowUp = "ArrowUp",
     ArrowDown = "ArrowDown",
     MTS = "MTS",
     MEM = "MEM",
-    Menu = "Menu"
+    Menu = "Menu",
+    TrashCan = "TrashCan",
+    Picture = "Picture",
 }
 
 export const enum EBlank {

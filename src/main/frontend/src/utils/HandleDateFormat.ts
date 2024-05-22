@@ -30,7 +30,7 @@ export const getHHMMSS = (date: any) => {
     return "" + hour + minute + second;
 };
 
-export const getYYYY_MM_DD = (date: any) => {
+export const getYYYYMMDDHMS = (date: any) => {
     let month = date.getMonth() + 1;
     let day = date.getDate();
     let hour = date.getHours();

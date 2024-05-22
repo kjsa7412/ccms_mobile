@@ -11,7 +11,9 @@ const ModalImage = () => {
         <>
             {rcModalImage.isOpen &&
                 <div className={"modalImage-overlay"} onClick={resetRcModalImage}>
-                    <img className={"modalImage-modal"} src={rcModalImage.src}/>
+                    <div className={"modalImage-modalContainer"}>
+                        <img className={"modalImage-modal"} src={rcModalImage.src}/>
+                    </div>
                 </div>
             }
         </>

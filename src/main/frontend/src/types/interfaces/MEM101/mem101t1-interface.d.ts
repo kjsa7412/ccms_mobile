@@ -12,6 +12,8 @@ export interface IResult_SelectMEM101T1 {
     purpose: string;
     purpose_detail: string;
     inst_dt: string;
+    mgmt_dept: string;
+    mgmt_comp: string;
     mgmt_person: string;
     mgmt_person_tel: string;
     equi_ip: string;

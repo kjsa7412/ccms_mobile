@@ -9,11 +9,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.*;
 
 /**
  * 프레임 공통 File 함수 정의
@@ -53,6 +53,7 @@ public class FrameFileUtil {
      * @return map
      */
     public static Map<String, String> makeFile(MultipartFile multipartFile, String path) throws Exception {
+        String systemOS = System.getProperty("os.name").toLowerCase();
 
         Map<String, String> map = new HashMap<String, String>();
 
@@ -79,6 +80,22 @@ public class FrameFileUtil {
 
             while ((len = is.read(buf)) > 0) {
                 os.write(buf, 0, len);
+            }
+
+            if(!systemOS.contains("win")) {
+                Set<PosixFilePermission> perms = new HashSet<>();
+                perms.add(PosixFilePermission.OWNER_READ);
+                perms.add(PosixFilePermission.OWNER_WRITE);
+                perms.add(PosixFilePermission.OWNER_EXECUTE);
+                perms.add(PosixFilePermission.GROUP_READ);
+                perms.add(PosixFilePermission.GROUP_WRITE);
+                perms.add(PosixFilePermission.GROUP_EXECUTE);
+                perms.add(PosixFilePermission.OTHERS_READ);
+                perms.add(PosixFilePermission.OTHERS_WRITE);
+                perms.add(PosixFilePermission.OTHERS_EXECUTE);
+
+                Path filePath = Paths.get(path + File.separator + srcFileName);
+                Files.setPosixFilePermissions(filePath, perms);
             }
 
             map.put("originalFilename", orgFileName);

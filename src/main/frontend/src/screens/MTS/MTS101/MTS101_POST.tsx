@@ -83,8 +83,7 @@ const MTS101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
                                     ];
 
                                     return (
-                                        <div key={"div-" + value.trou_mngr_dd_no} style={{width: '100%'}}>
-                                            <Blank key={"blank-" + value.trou_mngr_dd_no} type={EBlank.Row}/>
+                                        <div key={"div-" + value.trou_mngr_dd_no} style={{width: '100%', marginBottom: '25px'}}>
                                             <Post key={"post-" + value.trou_mngr_dd_no}
                                                   postData={params}
                                                   link={"/MTS101T1"}

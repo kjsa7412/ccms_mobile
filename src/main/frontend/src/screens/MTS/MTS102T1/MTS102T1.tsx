@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ScreenContainer from "../../../components/containers/ScreenContainer";
 import PageTitle from "../../../components/PageTitle";
 import HeaderBase from "../../../components/header/HeaderBase";
@@ -13,11 +13,19 @@ import {FormProvider, useForm} from "react-hook-form";
 import {initData, loadData} from "../MTS102T1/MTS102T1_FORM";
 import {useMutation, useQuery} from "react-query";
 import {EQueryKey} from "@custom-enums/queryKey_enum";
-import {deleteTROU, selectMTS102T1, updateTROU, selectTSGBForSearch, selectTSMETHForSearch} from "./MTS102T1_API";
+import {
+    deleteTROU,
+    selectAtfi,
+    selectMTS102T1,
+    selectTROUAtfi,
+    selectTSGBForSearch,
+    selectTSMETHForSearch,
+    updateTROU
+} from "./MTS102T1_API";
 import ScreenLabel from "../../../components/label/ScreenLabel";
 import LoadingPost from "../../../components/loading/LoadingPost";
 import RowContents from "../../../components/contents/RowContents";
-import {formattedDate} from "../../../utils/HandleDateFormat";
+import {formattedDate, getHHMMSS, getYYYYMMDD} from "../../../utils/HandleDateFormat";
 import InputContainer from "../../../components/containers/InputContainer";
 import Input from "../../../components/input/Input";
 import UpsertSubmitButton from "../../../components/button/UpsertSubmitButton";
@@ -25,8 +33,12 @@ import Blank from "../../../components/Blank";
 import {IModalAlert, IModalMutation} from "@custom-interfaces/modal-interface";
 import {modalAlertAtom} from "../../../atoms/modalAlertAtom";
 import {modalMutationAtom} from "../../../atoms/modalMutationAtom";
-import {selectAtfi} from "../MTS101T1/MTS101T1_API";
 import ImageListRow from "../../../components/imageList/ImageListRow";
+import AttachFile from "../../../components/attachFile/AttachFile";
+import {IAttachFile} from "@custom-interfaces/attachFile-interface";
+import {attachFileAtom} from "../../../atoms/attachFileAtom";
+import useAttachFileAtomAction from "../../../action/useAttachFileAtomAction";
+import {EAttachFileAtomAction} from "@custom-enums/action-enum";
 
 const MTS102T1 = () => {
     // data
@@ -35,6 +47,8 @@ const MTS102T1 = () => {
     const [, setRcModalAlert] = useRecoilState<IModalAlert>(modalAlertAtom);
     const [, setRcModalMutation] = useRecoilState<IModalMutation>(modalMutationAtom);
 
+    const [rcAttachFile, setRcAttachFile] = useRecoilState<IAttachFile>(attachFileAtom);
+    const initUseSave = useAttachFileAtomAction(EAttachFileAtomAction.InitUseSave);
 
     // form
     const methods = useForm({
@@ -58,6 +72,27 @@ const MTS102T1 = () => {
         () => selectAtfi({atfi_id: rcMTS102.atfi_id})
     );
 
+    const resultQuery_selectTORUAtfi = useQuery(
+        [EQueryKey.MTS102T1_selectTROUAtfi],
+        () => selectTROUAtfi({trou_id: rcMTS102.id}),
+        {
+            onSuccess: (data) => {
+                !!data?.data?.Content &&
+                setRcAttachFile((prev) => ({
+                    ...prev,
+                    savedFile: data.data.Content,
+                    isLoadingSavedFile: false
+                }));
+            },
+            onError: (err) => {
+                setRcAttachFile((prev) => ({
+                    ...prev,
+                    isLoadingSavedFile: false
+                }));
+            }
+        }
+    );
+
     const resultQuery_selectTSGBForSearch = useQuery(
         [EQueryKey.SEARCH_TSGB],
         selectTSGBForSearch,
@@ -70,10 +105,30 @@ const MTS102T1 = () => {
 
     // mutation
     const resultMutation_updateTROU = useMutation(
-        () => updateTROU({
-            id: rcMTS102.id,
-            ...methods.getValues()
-        }),
+        () => {
+            const fd = new FormData();
+            fd.append("id", rcMTS102.id);
+            fd.append("trou_acto_stts_cd", methods.getValues("trou_acto_stts_cd"));
+            // @ts-ignore
+            fd.append("trou_gb_acto_cd", methods.getValues("trou_gb_acto_cd").value);
+            // @ts-ignore
+            fd.append("trou_acto_meth_cd", methods.getValues("trou_acto_meth_cd").value);
+            fd.append("trou_acto_dd", getYYYYMMDD(methods.getValues("trou_acto_dd")));
+            fd.append("trou_acto_hrti", getHHMMSS(methods.getValues("trou_acto_dd")));
+            fd.append("trou_actr_nm", methods.getValues("trou_actr_nm"));
+            fd.append("trou_acto_cont", methods.getValues("trou_acto_cont"));
+            fd.append("recall_dt", !!methods.getValues("recall_dt") ? getYYYYMMDD(methods.getValues("recall_dt")) : "");
+
+            rcAttachFile.attachFile.forEach(function(item) {
+                fd.append("file", item.imgFile);
+            })
+
+            rcAttachFile.deleteFile.forEach(function(item) {
+                fd.append("deleteKey", item);
+            })
+
+            return updateTROU(fd);
+        },
         {
             onSuccess: (data, variables, context) => {
                 if (data.data.IsError) {
@@ -177,6 +232,12 @@ const MTS102T1 = () => {
             }));
         }
     };
+    useEffect(() => {
+        initUseSave();
+        return () => {
+        };
+    }, []);
+
 
     return (
         <ScreenContainer>
@@ -311,6 +372,9 @@ const MTS102T1 = () => {
                             resultQuery_selectMTS102T1.isFetching === true
                         }
                     />
+                    <Blank type={EBlank.Row}/>
+                    <ScreenLabel title={'첨부파일'}/>
+                    <AttachFile/>
                     <UpsertSubmitButton
                         value={'등록'}
                         isLoading={resultMutation_updateTROU.isLoading}

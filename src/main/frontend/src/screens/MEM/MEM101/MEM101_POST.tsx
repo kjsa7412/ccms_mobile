@@ -80,8 +80,7 @@ const MEM101_POST = ({selectQuery, postMax}: { selectQuery: any, postMax: number
                                     ];
 
                                     return (
-                                        <div key={"div-" + value.area_id} style={{width: '100%'}}>
-                                            <Blank key={"blank-" + value.area_id} type={EBlank.Row}/>
+                                        <div key={"div-" + value.area_id} style={{width: '100%', marginBottom: '25px'}}>
                                             <Post key={"post-" + value.area_id}
                                                   postData={params}
                                                   link={"/MEM101T1"}

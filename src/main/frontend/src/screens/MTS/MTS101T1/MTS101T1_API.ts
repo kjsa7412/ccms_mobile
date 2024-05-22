@@ -24,21 +24,9 @@ export const selectAtfi = (param: IParam_SelectAtfi):
     });
 };
 
-export const insertTROU = (param: IParam_InsertTROU):
+export const insertTROU = (param: any):
     Promise<AxiosResponse<IAPIResponse<number>>> => {
-    return axios.post("/api/common/merge", {
-        queryId: "mts101t1.insertTROU",
-        id: param.id,
-        trou_acto_stts_cd: param.trou_acto_stts_cd,
-        trou_gb_acto_cd: param.trou_gb_acto_cd?.value,
-        trou_acto_meth_cd: param.trou_acto_meth_cd?.value,
-        trou_acto_dd: getYYYYMMDD(param.trou_acto_dd),
-        trou_acto_hrti: getHHMMSS(param.trou_acto_dd),
-        trou_actr_nm: param.trou_actr_nm,
-        trou_acto_cont: param.trou_acto_cont,
-        recall_dt: !!param.recall_dt ? getYYYYMMDD(param.recall_dt) : "",
-        equi_cd: param.equi_cd
-    });
+    return axios.post("/api/mts101t1/insertTROU", param);
 };
 
 export const selectTSGBForSearch = ():

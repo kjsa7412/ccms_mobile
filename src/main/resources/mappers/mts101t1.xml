@@ -68,4 +68,41 @@
         WHERE COMP_CD = #{compCd}
         AND EQUI_CD = #{equi_cd};
     </update>
+
+    <insert id="insertFile">
+        /* mts101t1.insertFile */
+        <selectKey keyProperty="atfiSeq" resultType="Int" order="BEFORE">
+            select coalesce(max(atfi_seq) + 1, 1) atfiSeq
+            from er_atfi_info
+            where trou_id = #{trouId}
+        </selectKey>
+            insert into er_atfi_info
+            (
+            comp_cd,
+            trou_id,
+            atfi_seq,
+            serv_path,
+            serv_file_nm,
+            orig_file_nm,
+            file_exte,
+            file_size,
+            dele_yn,
+            reg_user_id,
+            reg_dt
+            )
+            values
+            (
+            #{compCd},
+            #{trouId},
+            #{atfiSeq},
+            #{servPath},
+            #{servFileNm},
+            #{origFileNm},
+            #{fileExte},
+            #{fileSize},
+            'N',
+            #{regUserId},
+            now()
+            );
+    </insert>
 </mapper>

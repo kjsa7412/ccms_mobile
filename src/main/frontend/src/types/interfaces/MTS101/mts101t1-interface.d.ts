@@ -48,4 +48,5 @@ interface IParam_InsertTROU {
     trou_acto_cont: string;
     recall_dt: Date | null;
     equi_cd: string;
+    file: any[];
 }
